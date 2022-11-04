@@ -10,11 +10,18 @@ import {
   _merge
 } from './resources/js/vite'
 
-export const defineConfig = (config: object = {}) => {
+interface TallConfigProps {
+  tailwind: boolean|undefined
+}
+
+export const defineConfig = (
+  config: object = {},
+  tall: TallConfigProps = {tailwind: true}
+) => {
 
   const isDev = _envIs(['local', 'development'], config.mode)
 
-	if (config.tailwind === true) {
+	if (tall.tailwind === true) {
     config = _merge(config, 'plugins', [
       tailwindcss()
     ])

@@ -1,3 +1,5 @@
-# Livewire-style components for Inertia Laravel
+## Tools for making wicked-awesome TALL stack apps
 
-Documentation coming soon...
+```
+composer require joshuaanderton/tall
+```

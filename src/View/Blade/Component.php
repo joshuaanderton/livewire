@@ -8,10 +8,10 @@ use App\View\Traits\WithMergeAttributes;
 use App\View\Traits\WithDefaultCssClasses;
 use App\View\Traits\WithTranslateAttributes;
 use Closure;
-use Ja\Tall\Support\Blade as JaBlade;
-use Illuminate\View\Component as BladeComponent;
+use Ja\Tall\Support\Blade as TallBlade;
+use Illuminate\View\Component as BaseComponent;
 
-class Component extends BladeComponent
+class Component extends BaseComponent
 {
     /**
      * Define a list of properties that should not be passed to view
@@ -119,8 +119,8 @@ class Component extends BladeComponent
         $componentClass = get_called_class();
 
         return (
-            JaBlade::componentHasTrait($componentClass, $trait) ||
-            JaBlade::componentHasTrait(get_parent_class($componentClass), $trait)
+            TallBlade::componentHasTrait($componentClass, $trait) ||
+            TallBlade::componentHasTrait(get_parent_class($componentClass), $trait)
         );
     }
 }

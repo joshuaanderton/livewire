@@ -5,7 +5,7 @@ import { _env, _set, _has, _cascade, _log } from './utils'
 
 export default (config: object = {}) => {
 
-	const hmrHost = _env('APP_URL', '', config.mode).split('//').reverse()[0] || 'localhost',
+	const hmrHost = String(_env('APP_URL', '', config.mode)).split('//').reverse()[0] || 'localhost',
 				host = _cascade(config, hmrHost, 'server.hmr.host', 'server.host', 'host'),
 				port = config.server?.port || 3000
 

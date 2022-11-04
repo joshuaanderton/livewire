@@ -2,7 +2,7 @@
 
 namespace Ja\View\Blade;
 
-use App\View\Traits\WithRoute;
+use Traits\WithRoute;
 use Illuminate\Support\{ Str, Arr };
 
 class Button extends Component
