@@ -11,7 +11,7 @@
   "require": {
       "php": "^8.0",
       "illuminate/support": "^8.67|^9.0",
-      "inertiajs/inertia-laravel": "^0.6.3"
+      "lorisleiva/laravel-actions": "^2.4"
   },
   "require-dev": {
       "phpunit/phpunit": "^9.3"
