@@ -18,12 +18,12 @@
   },
   "autoload": {
       "psr-4": {
-          "Ja\\Livewire\\": "src"
+          "Ja\\Tall\\": "src"
       }
   },
   "autoload-dev": {
       "psr-4": {
-          "Ja\\Livewire\\Tests\\": "tests"
+          "Ja\\Tall\\Tests\\": "tests"
       }
   },
   "config": {
