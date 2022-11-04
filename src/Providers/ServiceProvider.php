@@ -70,7 +70,7 @@ class ServiceProvider extends BaseServiceProvider
             $loader = AliasLoader::getInstance();
 
             collect([
-                'Tall' => 'Ja\\Tall\\Support\\Helpers',
+                'Tall' => 'Ja\\Tall\\Support\\Helper',
             ])->map(fn ($class, $namespace) => (
                 $loader->alias(
                     $namespace,
