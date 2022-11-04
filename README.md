@@ -1,0 +1,3 @@
+# Livewire-style components for Inertia Laravel
+
+Documentation coming soon...
