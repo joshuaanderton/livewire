@@ -1,6 +1,6 @@
 <?php
 
-namespace Blazervel\Inertia\Providers;
+namespace Ja\Tall\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Foundation\AliasLoader;
