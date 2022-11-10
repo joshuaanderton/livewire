@@ -1,4 +1,3 @@
-import { defineConfig as viteDefineConfig } from 'vite'
 import tailwindcss from 'tailwindcss'
 
 import {
@@ -39,7 +38,5 @@ export const defineConfig = (
 	}
 
 	// Pass to vite
-	return viteDefineConfig(
-    config
-  )
+	return config;
 }

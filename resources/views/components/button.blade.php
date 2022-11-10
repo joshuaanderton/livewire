@@ -1,11 +1,11 @@
-<{{ $as }} {{ $attributes->merge(['type' => 'button', 'href' => $href]) }}>
+<{{ $tag }} {{ $attributes->merge(['type' => 'button', 'href' => $href]) }}>
 
-    @if($icon)
+    @if ($icon)
         <span><x-icon :name="$icon" class="h-5 w-5" /></span>
     @endif
 
-    @if($text || $slot->isNotEmpty())
+    @if ($text || $slot->isNotEmpty())
         <span class="flex-1">{{ $text }}{{ $slot }}</span>
     @endif
 
-</{{ $as }}>
+</{{ $tag }}>

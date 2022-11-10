@@ -2,26 +2,31 @@
 
 namespace Ja\Tall\Blade\Traits;
 
-use Illuminate\Support\Facades\File;
-use Ja\Tall\Blade as JaBlade;
+use Ja\Tall\Support\Blade as JaBlade;
 
-trait WithTailwindMerge
+trait Mergeable
 {
-    private function tailwindCssClasses()
-    {
-        if (File::exists($manifestPath = base_path('public/build/manifest.json')) $manifest = json_decode()
-    }
+    /**
+     * Define attributes that should be merged
+     * 
+     * @return array $mergeable
+     */
+    // protected array $mergeable = [];
 
     /**
-     * Merge list of tailwind CSS classes
+     * Merge attributes from $mergeable class property and set to class or return for $attributes
      * 
      * @var array $mergeable
      * @return array
      */
-    protected function mergeAttributes(array $mergeable = null): array
+    protected function getMergeable(array $mergeable = null): array
     {
+        $this->except = array_merge($this->except, [
+            'mergeable'
+        ]);
+        
         $mergeable = collect(array_merge(
-            $this->mergeable ?: [],
+            $this->props ?: [],
             $mergeable ?: []
         ));
 

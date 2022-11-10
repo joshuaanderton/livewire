@@ -2,29 +2,36 @@
 
 namespace Ja\Tall\Blade\Traits;
 
-use Ja\Tall\Blade as JaBlade;
+use Ja\Tall\Support\Blade as JaBlade;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Lang;
 
-trait WithTranslateAttributes
+trait Translatable
 {
     /**
-     * Translate translateable fields
+     * Define attributes that should be translated
      * 
-     * @var array $translateable
+     * @return ?array
+     */
+    // protected array $translatable = [];
+
+    /**
+     * Translate translatable fields
+     * 
+     * @var array $translatable
      * @return array
      */
-    protected function translateAttributes(array $translateableData = null): array
+    protected function getTranslatable(array $translatable = null): array
     {
-        if ($this->translateable ?? false) {
-            $translateableData = collect($this->translateable)
+        if ($this->translatable ?? false) {
+            $translatable = collect($this->translatable)
                                     ->map(fn ($name) => [$name => $this->$name])
                                     ->collapse()
-                                    ->union($translateableData ?: [])
+                                    ->union($translatable ?: [])
                                     ->all();
         }
 
-        $translated = collect($translateableData)
+        $translated = collect($translatable)
                         ->map(fn ($value, $name) => (
                             Str::contains($value, '.') && Lang::has($value)
                                 ? Lang::get($value)
@@ -39,7 +46,7 @@ trait WithTranslateAttributes
         // Return translated attributes that are not properties nor in $except array
         return $translated
                     ->filter(fn ($value, $name) => (
-                        !JaBlade::hasProperty($this, $name) &&
+                        //!JaBlade::hasProperty($this, $name) &&
                         !in_array($name, $this->except)
                     ))
                     ->all();

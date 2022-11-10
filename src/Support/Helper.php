@@ -3,10 +3,11 @@
 namespace Ja\Tall\Support;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class Helper
 {
-    protected const packagePath = __DIR__ . '../../';
+    protected const packagePath = __DIR__ . '/../../';
 
     public static function arr(...$parameters): array
     {
@@ -22,9 +23,13 @@ class Helper
 
     public static function path(string ...$parameters): string
     {
-        return base_path(
-            join('/', $parameters)
-        );
+        $path = join('/', $parameters);
+        $path = base_path($path);
+
+        // Clean up any double slashes from concatenation
+        $path = Str::replace('//', '/', $path);
+
+        return $path;
     }
 
     public static function vendorPath(string ...$parameters): string
@@ -45,7 +50,15 @@ class Helper
 
     public static function packagePath(string ...$parameters): string
     {
-        return join('/', array_merge([static::packagePath], $parameters));
+        $path = join('/', [
+            static::packagePath,
+            ...$parameters
+        ]);
+
+        // Clean up any double slashes from concatenation
+        $path = Str::replace('//', '/', $path);
+
+        return $path;
     }
 
     public static function packageViewsPath(string ...$parameters)
@@ -53,6 +66,25 @@ class Helper
         return static::packagePath(
             'resources/views',
             ...$parameters
+        );
+    }
+
+    public static function route(string|array $route, array $params = [], bool $absolute = false)
+    {
+        if (is_array($route)) {
+            @list($routeName, $routeParams, $routeAbsolute) = $route;
+
+            return route(
+                $routeName,
+                $routeParams ?: $params,
+                $routeAbsolute ?: $absolute
+            );
+        }
+    
+        return route(
+            $route,
+            $params,
+            $absolute
         );
     }
 }

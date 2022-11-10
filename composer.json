@@ -2,6 +2,7 @@
   "name": "joshuaanderton/tall",
   "description": "Tools for making wicked-awesome TALL stack apps",
   "license": "MIT",
+  "version": "0.0.4",
   "authors": [
       {
           "name": "Joshua Anderton",

@@ -47,7 +47,7 @@ class ServiceProvider extends BaseServiceProvider
     private function loadComponents(): self
     {
         Blade::componentNamespace(
-            'Ja\\View\\Components',
+            'Ja\\Tall\\Blade',
             'tall'
         );
 

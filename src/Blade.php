@@ -3,31 +3,23 @@
 namespace Ja\Tall;
 
 use Closure;
+use Exception;
 use Ja\Tall\Support\Blade as TallBlade;
-use Ja\Tall\Blade\Traits\WithMergeAttributes;
-use Ja\Tall\Blade\Traits\WithDefaultCssClasses;
-use Ja\Tall\Blade\Traits\WithTranslateAttributes;
+use Ja\Tall\Blade\Traits\Mergeable;
+use Ja\Tall\Blade\Traits\CssClassable;
+use Ja\Tall\Blade\Traits\Translatable;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
 
 class Blade extends Component
 {
-    /**
-     * Define a list of properties that should not be passed to view
-     *
-     * @return array
-     */
-    public $except = [
-        'except',
-        'mergeable',
-        'mergeClassNames',
-        'hasProperty',
-    ];
+    protected array $props;
 
-    public function __construct()
-    {
-        //
-    }
+    // public function __construct(...$props)
+    // {
+    //     $this->props = $props;
+    // }
 
     /**
      * Automatically get the component's view path
@@ -41,8 +33,17 @@ class Blade extends Component
             return $this->componentViewPath;
         }
 
-        $viewPath = get_called_class();                                            // App\View\Components\Modals\ModalHeader (example)
-        $viewPath = Str::remove('App\\View\\Components\\', $viewPath);             // Modals\ModalHeader
+        // TODO: Return null if $componentClass has render() method defined
+
+        $componentClass = get_called_class();
+        $baseComponentsNamespace = 'App\\View\\Components';
+
+        if (Str::contains($componentClass, self::class)) {
+            $baseComponentsNamespace = self::class;
+        }
+
+        $viewPath = $componentClass;                                               // Ja\Tall\Blade as Components\Modals\ModalHeader (example)
+        $viewPath = Str::remove("{$baseComponentsNamespace}\\", $viewPath);        // Modals\ModalHeader
         $viewPath = explode('\\', $viewPath);                                      // ['Modals', 'ModalHeader']
         $viewPath = collect($viewPath)->map(fn ($slug) => Str::snake($slug, '-')); // ['modals', 'modal-header']
         $viewPath = $viewPath->join('.');                                          // modals.modal-header
@@ -61,11 +62,14 @@ class Blade extends Component
             return '';
         }
 
-        $addAttributes = $this->getMergeableAttributes();
+        // $props = $this->props;
+        // return $this->render(...$props);
+
+        $addAttributes = $this->getMergeAttributes();
 
         return function ($data) use ($addAttributes) {
 
-            if (count($addAttributes) > 0) {
+            if ($addAttributes) {
                 $data['attributes'] = $data['attributes']->merge(
                     $addAttributes
                 );
@@ -78,31 +82,36 @@ class Blade extends Component
                 $data['model'] = $wireModel;
             }
 
-            return view("components.{$this->componentViewPath()}", $data)->render();
+            // Attempt to load bade theme override of component view
+            if (View::exists($view = "components.{$this->componentViewPath()}")) {
+                return view($view, $data)->render();
+            }
+
+            return view("tall::components.{$this->componentViewPath()}", $data)->render();
         };
     }
 
     /**
-     * Checks for our custom trait (e.g. WithMergeAttributes),
+     * Checks for our custom trait (e.g. Mergeable),
      * sets neccessary class properties,
      * returns neccessary attributes for passing to view
      *
      * @return array
      */
-    private function getMergeableAttributes()
+    private function getMergeAttributes()
     {
         $addAttributes = [];
 
-        if ($this->hasTrait(WithMergeAttributes::class)) {
-            $addAttributes = array_merge($addAttributes, $this->mergeAttributes());
+        if ($this->hasTrait(Mergeable::class)) {
+            $addAttributes = array_merge($addAttributes, $this->getMergeable());
         }
 
-        if ($this->hasTrait(WithTranslateAttributes::class)) {
-            $addAttributes = array_merge($addAttributes, $this->translateAttributes());
+        if ($this->hasTrait(CssClassable::class)) {
+            $addAttributes = array_merge($addAttributes, $this->getCssClassable());
         }
 
-        if ($this->hasTrait(WithDefaultCssClasses::class)) {
-            $addAttributes = array_merge($addAttributes, $this->mergeClassNames());
+        if ($this->hasTrait(Translatable::class)) {
+            $addAttributes = array_merge($addAttributes, $this->getTranslatable());
         }
 
         return $addAttributes;

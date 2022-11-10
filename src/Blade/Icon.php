@@ -3,6 +3,7 @@
 namespace Ja\Tall\Blade;
 
 use Exception;
+use Illuminate\Support\Facades\File;
 use Ja\Tall\Support\Helper as Tall;
 use Ja\Tall\Blade as Component;
 
@@ -34,11 +35,10 @@ class Icon extends Component
 
     private function getSvg()
     {
-        $path = Tall::viewsPath(
-            'components/icon/heroicons',
+        $path = Tall::packageViewsPath(
+            'components/icons/heroicons',
             $this->type,
-            $this->name,
-            '.svg'
+            "{$this->name}.svg"
         );
 
         if (File::exists($path)) {
@@ -51,7 +51,7 @@ class Icon extends Component
     public function render()
     {
         return <<<'blade'
-            <span {{ $attributes }}>{!! svg !!}</span>
+            <span {{ $attributes->merge(['class' => 'fill-current']) }}>{!! $svg !!}</span>
         blade;
     }
 }
