@@ -1,7 +1,7 @@
 ## Tools for making wicked-awesome TALL stack apps
 
 ```
-composer require joshuaanderton/tall
+composer require tallstackapp/tools
 ```
 
 ### Blade Components
