@@ -22,7 +22,7 @@ class TagCompiler extends ComponentTagCompiler
         $pattern = "/
       <
         \s*
-        b[-\:]([\w\-\:\.]*)
+        tall[-\:]([\w\-\:\.]*)
         (?<attributes>
           (?:
             \s+
@@ -74,7 +74,7 @@ class TagCompiler extends ComponentTagCompiler
         $pattern = "/
       <
         \s*
-        b[-\:]([\w\-\:\.]*)
+        tall[-\:]([\w\-\:\.]*)
         \s*
         (?<attributes>
           (?:
