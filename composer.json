@@ -18,12 +18,12 @@
   },
   "autoload": {
       "psr-4": {
-          "Ja\\Tall\\": "src"
+          "TallStackApp\\Tools\\": "src"
       }
   },
   "autoload-dev": {
       "psr-4": {
-          "Ja\\Tall\\Tests\\": "tests"
+          "TallStackApp\\Tools\\Tests\\": "tests"
       }
   },
   "config": {
@@ -32,7 +32,7 @@
   "extra": {
       "laravel": {
           "providers": [
-              "Ja\\Tall\\Providers\\ServiceProvider"
+              "TallStackApp\\Tools\\Providers\\ServiceProvider"
           ]
       }
   }

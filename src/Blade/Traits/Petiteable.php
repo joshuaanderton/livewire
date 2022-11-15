@@ -1,8 +1,8 @@
 <?php
 
-namespace Ja\Tall\Blade\Traits;
+namespace TallStackApp\Tools\Blade\Traits;
 
-use Ja\Tall\Support\Blade as JaBlade;
+use TallStackApp\Tools\Support\Blade as JaBlade;
 use Illuminate\Support\Arr;
 use Exception;
 

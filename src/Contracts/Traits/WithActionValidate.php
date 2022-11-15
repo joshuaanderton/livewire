@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Tall\Contracts\Traits;
+namespace TallStackApp\Tools\Contracts\Traits;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;

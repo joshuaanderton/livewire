@@ -1,8 +1,8 @@
 <?php
 
-namespace Ja\Tall\Blade\Traits;
+namespace TallStackApp\Tools\Blade\Traits;
 
-use Ja\Tall\Support\Helper as Tall;
+use TallStackApp\Tools\Support\Helper as Tall;
 
 trait Routable
 {

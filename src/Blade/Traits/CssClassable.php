@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Tall\Blade\Traits;
+namespace TallStackApp\Tools\Blade\Traits;
 
 use Illuminate\Support\Arr;
 

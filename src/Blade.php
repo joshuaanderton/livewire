@@ -1,13 +1,13 @@
 <?php
 
-namespace Ja\Tall;
+namespace TallStackApp\Tools;
 
 use Closure;
 use Exception;
-use Ja\Tall\Support\Blade as TallBlade;
-use Ja\Tall\Blade\Traits\Mergeable;
-use Ja\Tall\Blade\Traits\CssClassable;
-use Ja\Tall\Blade\Traits\Translatable;
+use TallStackApp\Tools\Support\Blade as TallBlade;
+use TallStackApp\Tools\Blade\Traits\Mergeable;
+use TallStackApp\Tools\Blade\Traits\CssClassable;
+use TallStackApp\Tools\Blade\Traits\Translatable;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
@@ -42,7 +42,7 @@ class Blade extends Component
             $baseComponentsNamespace = self::class;
         }
 
-        $viewPath = $componentClass;                                               // Ja\Tall\Blade as Components\Modals\ModalHeader (example)
+        $viewPath = $componentClass;                                               // TallStackApp\Tools\Blade as Components\Modals\ModalHeader (example)
         $viewPath = Str::remove("{$baseComponentsNamespace}\\", $viewPath);        // Modals\ModalHeader
         $viewPath = explode('\\', $viewPath);                                      // ['Modals', 'ModalHeader']
         $viewPath = collect($viewPath)->map(fn ($slug) => Str::snake($slug, '-')); // ['modals', 'modal-header']

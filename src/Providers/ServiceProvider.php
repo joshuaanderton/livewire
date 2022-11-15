@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Tall\Providers;
+namespace TallStackApp\Tools\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Foundation\AliasLoader;
@@ -70,7 +70,14 @@ class ServiceProvider extends BaseServiceProvider
             $loader = AliasLoader::getInstance();
 
             collect([
-                'Tall' => 'Ja\\Tall\\Support\\Helper',
+                Ja\Tall\Blade::class                     => TallStackApp\Tools\Blade::class,
+                Ja\Tall\Blade\Traits\CssClassable::class => TallStackApp\Tools\Blade\Traits\CssClassable::class,
+                Ja\Tall\Blade\Traits\Mergeable::class    => TallStackApp\Tools\Blade\Traits\Mergeable::class,
+                Ja\Tall\Blade\Traits\Routable::class     => TallStackApp\Tools\Blade\Traits\Routable::class,
+                Ja\Tall\Blade\Traits\Translatable::class => TallStackApp\Tools\Blade\Traits\Translatable::class,
+                Ja\Tall\Blade\Traits\WithHooks::class    => TallStackApp\Tools\Blade\Traits\WithHooks::class,
+                Ja\Tall\Support\Helper::class            => TallStackApp\Tools\Tall\Support\Helper::class,
+                Tall::class                              => TallStackApp\Tools\Tall\Support\Helper::class,
             ])->map(fn ($class, $namespace) => (
                 $loader->alias(
                     $namespace,

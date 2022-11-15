@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Tall\Support;
+namespace TallStackApp\Tools\Support;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;

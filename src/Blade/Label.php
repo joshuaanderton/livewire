@@ -1,9 +1,9 @@
 <?php
 
-namespace Ja\Tall\Blade;
+namespace TallStackApp\Tools\Blade;
 
-use Ja\Tall\Blade\Traits\Translatable;
-use Ja\Tall\Blade as Component;
+use TallStackApp\Tools\Blade\Traits\Translatable;
+use TallStackApp\Tools\Blade as Component;
 
 class Label extends Component
 {

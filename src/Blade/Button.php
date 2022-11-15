@@ -1,13 +1,13 @@
 <?php
 
-namespace Ja\Tall\Blade;
+namespace TallStackApp\Tools\Blade;
 
 use Illuminate\Support\Facades\Auth;
-use Ja\Tall\Blade\Traits\Mergeable;
-use Ja\Tall\Blade\Traits\CssClassable;
-use Ja\Tall\Blade\Traits\Routable;
-use Ja\Tall\Blade\Traits\Translatable;
-use Ja\Tall\Blade as Component;
+use TallStackApp\Tools\Blade\Traits\Mergeable;
+use TallStackApp\Tools\Blade\Traits\CssClassable;
+use TallStackApp\Tools\Blade\Traits\Routable;
+use TallStackApp\Tools\Blade\Traits\Translatable;
+use TallStackApp\Tools\Blade as Component;
 
 class Button extends Component
 {

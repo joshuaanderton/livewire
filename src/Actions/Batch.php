@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Tall\Actions;
+namespace TallStackApp\Tools\Actions;
 
 
 class Batch

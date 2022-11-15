@@ -1,11 +1,11 @@
 <?php
 
-namespace Ja\Tall\Blade;
+namespace TallStackApp\Tools\Blade;
 
 use Exception;
 use Illuminate\Support\Facades\File;
-use Ja\Tall\Support\Helper as Tall;
-use Ja\Tall\Blade as Component;
+use TallStackApp\Tools\Support\Helper as Tall;
+use TallStackApp\Tools\Blade as Component;
 
 class Icon extends Component
 {

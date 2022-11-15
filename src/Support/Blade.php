@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Tall\Support;
+namespace TallStackApp\Tools\Support;
 
 use Exception;
 use Illuminate\View\Component as BladeComponent;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Tall;
+namespace TallStackApp\Tools;
 
 use Lorisleiva\Actions\Concerns\AsController;
 use Lorisleiva\Actions\Concerns\AsObject;
