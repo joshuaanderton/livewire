@@ -1,0 +1,25 @@
+@import '@pckg/choices.js/public/assets/styles/choices.min.css';
+
+.choices {
+  @apply !border-none -mx-px !overflow-visible;
+}
+
+.choices__inner {
+  @apply w-full !border z-[2] relative !border-gray-200 !bg-white text-base sm:text-sm focus-within:ring-primary-400 focus-within:border-primary-400 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white dark:placeholder-neutral-500 !h-[36px] py-0 !min-h-0 bg-transparent flex items-center !rounded-md;
+}
+
+.choices__input {
+  @apply !ring-0 !bg-transparent !outline-none !p-0 m-0;
+}
+
+.choices__inner .choices__item {
+  @apply !my-0 !bg-primary-400 !border-none rounded !px-[4px] !py-[2px];
+}
+
+.choices__list--dropdown {
+  @apply !mt-px !rounded-md !border-gray-200 !bg-white !z-[1];
+}
+
+.choices__list .choices__list .choices__item {
+   @apply !py-0 !h-[36px] flex items-center;
+}

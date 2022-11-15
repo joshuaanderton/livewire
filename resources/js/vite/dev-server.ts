@@ -1,11 +1,12 @@
 import { resolve } from 'path'
+import { UserConfig } from 'vite'
 import fs from 'fs'
 import { homedir } from 'os'
 import { _env, _set, _has, _cascade, _log } from './utils'
 
-export default (config: object = {}) => {
+export default (config: UserConfig, mode: string) => {
 
-	const hmrHost = String(_env('APP_URL', '', config.mode)).split('//').reverse()[0] || 'localhost',
+	const hmrHost = String(_env('APP_URL', '', mode)).split('//').reverse()[0] || 'localhost',
 				host = _cascade(config, hmrHost, 'server.hmr.host', 'server.host', 'host'),
 				port = config.server?.port || 3000
 
@@ -22,7 +23,7 @@ export default (config: object = {}) => {
 	return config
 }
 
-const httpsConfig = (config: object) => {
+const httpsConfig = (config: UserConfig) => {
 
 	// If key and cert are set at this point
 	// then it was by the dev (always trust the dev)
@@ -46,7 +47,7 @@ const httpsConfig = (config: object) => {
 	} catch {
 		// If the dev was hoping for https, then tell them what happened
 		// config.server.host was set in last step
-		if (config.server.https === true) {
+		if (config.server?.https === true) {
 			_log(
 				'{theme}[Blazervel]',
 				`No key/cert at {green}${valetDefaultCredsPath}`,

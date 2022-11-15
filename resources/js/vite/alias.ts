@@ -2,10 +2,8 @@ import { searchForWorkspaceRoot } from 'vite'
 import { _env, _set, _merge } from './utils'
 import path from 'path'
 
-export default (config: object = {}) => {
+export default (config: {preserveSymlinks?: boolean} = {}, packagePath: string) => {
 	
-	const packagePath = _env('DEV_VENDOR_PATH', './vendor', config.mode)
-
   // Support symlinks for aliasing vendor packages
 	if (config.preserveSymlinks !== false) {
 		config.preserveSymlinks = true
@@ -13,13 +11,14 @@ export default (config: object = {}) => {
 
   // Allow aliasing this package
   config = _merge(config, 'server.fs.allow', [
-    path.resolve(`${packagePath}/joshuaanderton`),
+    path.resolve(packagePath),
     searchForWorkspaceRoot(process.cwd())
   ])
 
   config = _merge(config, 'resolve.alias', {
     '@vendor': path.resolve('./vendor'),
-    '@tall':   path.resolve(`${packagePath}/joshuaanderton/tall/resources/js`),
+    '@pckg':   path.resolve('./node_modules'),
+    '@tall':   path.resolve(`${packagePath}/resources/js`),
     '@':       path.resolve('./resources/js'),
   })
 
