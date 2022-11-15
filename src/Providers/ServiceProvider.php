@@ -70,14 +70,19 @@ class ServiceProvider extends BaseServiceProvider
             $loader = AliasLoader::getInstance();
 
             collect([
-                Ja\Tall\Blade::class                     => TallStackApp\Tools\Blade::class,
-                Ja\Tall\Blade\Traits\CssClassable::class => TallStackApp\Tools\Blade\Traits\CssClassable::class,
-                Ja\Tall\Blade\Traits\Mergeable::class    => TallStackApp\Tools\Blade\Traits\Mergeable::class,
-                Ja\Tall\Blade\Traits\Routable::class     => TallStackApp\Tools\Blade\Traits\Routable::class,
-                Ja\Tall\Blade\Traits\Translatable::class => TallStackApp\Tools\Blade\Traits\Translatable::class,
-                Ja\Tall\Blade\Traits\WithHooks::class    => TallStackApp\Tools\Blade\Traits\WithHooks::class,
-                Ja\Tall\Support\Helper::class            => TallStackApp\Tools\Tall\Support\Helper::class,
-                Tall::class                              => TallStackApp\Tools\Tall\Support\Helper::class,
+
+                // Old namespace
+                \Ja\Tall\Blade::class                     => \TallStackApp\Tools\Blade::class,
+                \Ja\Tall\Blade\Traits\CssClassable::class => \TallStackApp\Tools\Blade\Traits\CssClassable::class,
+                \Ja\Tall\Blade\Traits\Mergeable::class    => \TallStackApp\Tools\Blade\Traits\Mergeable::class,
+                \Ja\Tall\Blade\Traits\Routable::class     => \TallStackApp\Tools\Blade\Traits\Routable::class,
+                \Ja\Tall\Blade\Traits\Translatable::class => \TallStackApp\Tools\Blade\Traits\Translatable::class,
+                \Ja\Tall\Blade\Traits\WithHooks::class    => \TallStackApp\Tools\Blade\Traits\WithHooks::class,
+                \Ja\Tall\Support\Helper::class            => \TallStackApp\Tools\Support\Helper::class,
+
+                // Helper class
+                \Tall::class                              => \TallStackApp\Tools\Support\Helper::class,
+                
             ])->map(fn ($class, $namespace) => (
                 $loader->alias(
                     $namespace,
