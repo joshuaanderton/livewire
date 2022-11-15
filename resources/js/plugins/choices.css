@@ -5,7 +5,7 @@
 }
 
 .choices__inner {
-  @apply w-full !border z-[2] relative !border-gray-200 !bg-white text-base sm:text-sm focus-within:ring-primary-400 focus-within:border-primary-400 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white dark:placeholder-neutral-500 !h-[36px] py-0 !min-h-0 bg-transparent flex items-center !rounded-md;
+  @apply w-full !border z-[2] relative !border-gray-200 !bg-white text-base sm:text-sm focus-within:ring-primary-400 focus-within:border-primary-400 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white dark:placeholder-neutral-500 !h-[38px] py-0 !min-h-0 bg-transparent flex items-center !rounded-md;
 }
 
 .choices__input {
@@ -21,5 +21,5 @@
 }
 
 .choices__list .choices__list .choices__item {
-   @apply !py-0 !h-[36px] flex items-center;
+   @apply !py-0 !h-[38px] flex items-center;
 }
