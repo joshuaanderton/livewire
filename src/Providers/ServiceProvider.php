@@ -2,18 +2,16 @@
 
 namespace TallStackApp\Tools\Providers;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
 {
-    private string $path = __DIR__ . '/../..';
-
     public function register()
     {
-        $this
-            ->registerClassAliases();
+        $this->registerClassAliases();
     }
 
     public function boot()
@@ -28,7 +26,7 @@ class ServiceProvider extends BaseServiceProvider
     private function loadRoutes()
     {
         $this->loadRoutesFrom(
-            "{$this->path}/routes/routes.php"
+            $this->path('routes/routes.php')
         );
 
         return $this;
@@ -37,7 +35,7 @@ class ServiceProvider extends BaseServiceProvider
     private function loadTranslations()
     {
         $this->loadTranslationsFrom(
-            "{$this->path}/lang",
+            $this->path('lang'),
             'tall'
         );
 
@@ -47,7 +45,7 @@ class ServiceProvider extends BaseServiceProvider
     private function loadComponents(): self
     {
         Blade::componentNamespace(
-            'Ja\\Tall\\Blade',
+            \TallStackApp\Tools\Blade::class,
             'tall'
         );
 
@@ -57,7 +55,7 @@ class ServiceProvider extends BaseServiceProvider
     private function loadViews(): self
     {
         $this->loadViewsFrom(
-            "{$this->path}/resources/views",
+            $this->path('resources/views'),
             'tall'
         );
 
@@ -92,5 +90,12 @@ class ServiceProvider extends BaseServiceProvider
         });
 
         return $this;
+    }
+
+    private function path(...$append): string
+    {
+        $path = Str::remove('/src/Providers', __DIR__);
+
+        return join('/', [$path, ...$append]);
     }
 }
