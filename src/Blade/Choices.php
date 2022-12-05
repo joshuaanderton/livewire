@@ -17,6 +17,8 @@ class Choices extends Component
 
     protected array $translatable = ['label'];
 
+    public array $props;
+
     /**
      * Create a new component instance.
      *

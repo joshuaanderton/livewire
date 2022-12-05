@@ -5,7 +5,7 @@
 }
 
 .choices__inner {
-  @apply w-full !border z-[2] relative !border-gray-200 !bg-white text-base sm:text-sm focus-within:ring-primary-400 focus-within:border-primary-400 dark:bg-neutral-700 dark:border-neutral-600 dark:text-white dark:placeholder-neutral-500 !h-[38px] py-0 !min-h-0 bg-transparent flex items-center !rounded-md;
+  @apply w-full !border z-[2] relative !bg-white text-base sm:text-sm !h-[38px] py-0 !min-h-0 bg-transparent flex items-center !rounded-md;
 }
 
 .choices__input {
@@ -13,13 +13,18 @@
 }
 
 .choices__inner .choices__item {
-  @apply !my-0 !bg-primary-400 !border-none rounded !px-[4px] !py-[2px];
+  @apply !my-0 !border-none rounded !px-[5px] !py-[2px];
 }
 
 .choices__list--dropdown {
-  @apply !mt-px !rounded-md !border-gray-200 !bg-white !z-[1];
+  @apply !mt-px !rounded-md !bg-white !z-[5];
 }
 
 .choices__list .choices__list .choices__item {
-   @apply !py-0 !h-[38px] flex items-center;
+  @apply !py-0 !h-[38px] flex items-center;
+}
+
+.choices[data-type*=select-multiple] .choices__button,
+.choices[data-type*=text] .choices__button {
+  @apply !ml-[4px];
 }
