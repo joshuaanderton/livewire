@@ -2,6 +2,10 @@
 
 namespace TallStackApp\Tools\Providers;
 
+use TallStackApp\Tools\Blade as TallBlade;
+use TallStackApp\Tools\Livewire as TallLivewire;
+
+use Livewire\Livewire;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Foundation\AliasLoader;
@@ -20,7 +24,8 @@ class ServiceProvider extends BaseServiceProvider
             ->loadRoutes()
             ->loadTranslations()
             ->loadViews()
-            ->loadComponents();
+            ->loadBladeComponents()
+            ->loadLivewireComponents();
     }
 
     private function loadRoutes()
@@ -42,12 +47,20 @@ class ServiceProvider extends BaseServiceProvider
         return $this;
     }
 
-    private function loadComponents(): self
+    private function loadBladeComponents(): self
     {
-        Blade::componentNamespace(
-            \TallStackApp\Tools\Blade::class,
-            'tall'
-        );
+        Blade::componentNamespace(TallBlade::class, 'tall');
+
+        return $this;
+    }
+
+    private function loadLivewireComponents(): self
+    {
+        collect([
+            'notifications' => TallLivewire\Notifications::class,
+        ])->each(fn ($class, $key) => (
+            Livewire::component("tall-{$key}", $class)
+        ));
 
         return $this;
     }

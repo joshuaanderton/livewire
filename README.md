@@ -4,6 +4,42 @@
 composer require tallstackapp/tools
 ```
 
+Import component JS and CSS dependencies:
+```
+// ./vite.config.ts
+import { defineConfig } from 'vite'
+import laravel from 'laravel-vite-plugin'
+import tall from './vendor/tallstackapp/tools'
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: [
+                'resources/js/app.js',
+                'resources/css/app.css',
+                'resources/js/legacy.js',
+                'resources/scss/legacy.scss',
+            ],
+            refresh: true,
+        }),
+        tall()
+    ]
+})
+```
+
+Include package views in tailwind config:
+```
+// ./tailwind.config.js
+
+module.exports = {
+  darkMode: 'class',
+	content: [
+		'./resources/views/**/*.blade.php',
+    './vendor/tallstackapp/tools/**/*.blade.php',
+	],
+  ...
+```
+
 ### Blade Components
 Tons of reuseable & extendible components (via TailwindCSS + AlpineJS).
 

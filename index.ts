@@ -1,4 +1,3 @@
-import tailwindcss from 'tailwindcss'
 import { UserConfig } from 'vite'
 import {
   aliasConfig,
@@ -8,11 +7,7 @@ import {
   _merge
 } from './resources/js/vite'
 
-interface TallConfigProps {
-  tailwind: boolean|undefined
-}
-
-export default (options: TallConfigProps) => ({
+export default () => ({
 
   name: 'tall',
   
@@ -20,12 +15,6 @@ export default (options: TallConfigProps) => ({
 
     if (!['build', 'serve'].includes(command)) {
       return config
-    }
-
-    if (options.tailwind === true) {
-      config = _merge(config, 'plugins', [
-        tailwindcss()
-      ])
     }
   
     // Add default aliases (e.g. alias @ -> ./resources/js)

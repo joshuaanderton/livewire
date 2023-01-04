@@ -9,59 +9,58 @@
         x-data="{
             values: $wire.get('{{ $model }}'),
             options: @js($options),
+            getOptions() {
+                return Object.entries(this.options).map(([value, label]) => ({
+                    value,
+                    label,
+                    selected: this.values.includes(parseInt(value)),
+                }))
+            },
             init() {
                 this.$nextTick(() => {
-                    
-                    let choices,
-                        options = {
-                            removeItems: true,
-                            removeItemButton: true,
-                            addItems: true
-                        }
-                    
-                    const canAddItems = (this.$refs.input.dataset.addItems || null) === 'true',
-                          refreshChoices = () => {
-                              choices.clearStore()
-                              choices.setChoices(Object.entries(this.options).map(([value, label]) => ({
-                                  value,
-                                  label,
-                                  selected: this.values.includes(parseInt(value)),
-                              })))
-                          }
 
-                    if (canAddItems) {
-                        choices = new Choices(this.$refs.input, {
-                            ...options,
-                            addItems: true
-                        })
-                    } else {
-                        choices = new Choices(this.$refs.input, options)
-    
-                        refreshChoices()
-                        this.$watch('values', () => refreshChoices())
-                        this.$watch('options', () => refreshChoices())
+                    const addItems = this.$refs.element.tagName === 'INPUT',
+                          instance = new Choices(this.$refs.element, {
+                              addItems,
+                              removeItems: true,
+                              removeItemButton: true,
+                          })
+
+                    if (addItems) {
+                        instance.setValue(
+                            this.options.length === 0
+                                ? object.values(this.value)
+                                : this.getOptions().filter(opt => opt.selected).map(opt => opt.label)
+                        )
+                        return
                     }
 
-                    this.$refs.input.addEventListener('change', () => {
-                        $wire.set('{{ $model }}', choices.getValue(true))
-                    })
+                    instance.setChoices(
+                        this.getOptions()
+                    )
                 })
             }
         }"
     >
-        @if ($attributes['data-add-items'] == 'true')
-            <input {{ $attributes->merge(['x-ref' => 'input']) }} />
+        @if ($addItems)
+            <input {{ $attributes->merge([
+                'x-ref' => 'element',
+                'type' => 'hidden',
+            ]) }} />
         @else
-            <select {{ $attributes->merge(['x-ref' => 'input', 'multiple' => true, 'multiselect' => true, 'type' => null]) }}></select>
+            <select {{ $attributes->merge([
+                'x-ref' => 'element',
+                'type' => null,
+                'multiple' => true,
+                'multiselect' => true,
+            ]) }}></select>
         @endif
     </div>
 
-    @if ($model = $attributes->wire('model')->value())
-        @error($model)
-            <div class="text-xs text-red-500 mt-1">
-                {{ $message }}
-            </div>
-        @enderror
-    @endif
+    @error($model)
+        <div class="text-xs text-red-500 mt-1">
+            {{ $message }}
+        </div>
+    @enderror
 
 </div>

@@ -17,6 +17,8 @@ class Choices extends Component
 
     protected array $translatable = ['label'];
 
+    public bool $addItems;
+
     public array $props;
 
     /**
@@ -27,11 +29,13 @@ class Choices extends Component
     public function __construct(
         array $options = null,
         string $label = null,
+        bool $addItems = null,
         array $props = null
     )
     {
         $this->options = $options ?: [];
         $this->label = $label;
+        $this->addItems = !! $addItems;
         $this->props = $props ?: [];
     }
 }
