@@ -50,6 +50,6 @@ class Notifications extends Component
 
     public function render()
     {
-        return view('jal::livewire.notifications');
+        return view('ja-livewire::livewire.notifications');
     }
 }

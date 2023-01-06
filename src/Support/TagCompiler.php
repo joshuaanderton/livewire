@@ -2,9 +2,10 @@
 
 namespace Ja\Livewire\Support;
 
+use Illuminate\Support\Str;
 use Illuminate\View\Compilers\ComponentTagCompiler;
 use InvalidArgumentException;
-use Ja\Livewire\Livewire as JaLivewire;
+use Ja\Livewire\Support\Helper as JaLivewire;
 
 class TagCompiler extends ComponentTagCompiler
 {
@@ -115,15 +116,27 @@ class TagCompiler extends ComponentTagCompiler
 
     public function componentClass(string $component)
     {
-        dd($component);
+        $className = (
+            collect(explode('.', $component))
+                ->map(fn ($ns) => Str::ucfirst(Str::camel($ns)))
+                ->join('\\')
+        );
 
-        // if ($class = JaLivewire::componentLookup($component)) {
-        //     return $class;
-        // }
+        if (class_exists($class = "\\App\\View\\Components\\{$className}")) {
+            return $class;
+        }
 
-        // if ($view = JaLivewire::viewLookup($component)) {
-        //     return $view;
-        // }
+        if (class_exists($class = "\\Ja\\Livewire\\Blade\\{$className}")) {
+            return $class;
+        }
+
+        if (view()->exists($view = "components.{$component}")) {
+            return $view;
+        }
+
+        if (view()->exists($view = "ja-livewire::components.{$component}")) {
+            return $view;
+        }
 
         throw new InvalidArgumentException(
             "Unable to locate a class or view for component [{$component}]."

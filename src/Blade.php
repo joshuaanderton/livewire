@@ -15,7 +15,7 @@ use Ja\Livewire\Support\Helper as Tall;
 
 class Blade extends Component
 {
-    protected array $props;
+    protected array $props = [];
 
     // public function __construct(...$props)
     // {
@@ -83,7 +83,13 @@ class Blade extends Component
                 $data['model'] = $wireModel;
             }
 
-            return Tall::view("components.{$this->componentViewPath()}", $data)->render();
+            $name = "components.{$this->componentViewPath()}";
+
+            if (Str::startsWith(get_called_class(), 'App\\View\\Components\\')) {
+                return view($name, $data)->render();
+            }
+
+            return Tall::view($name, $data)->render();
 
         };
     }

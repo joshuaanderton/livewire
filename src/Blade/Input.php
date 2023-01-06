@@ -122,9 +122,4 @@ class Input extends Component
         //     $this->autocomplete = $value;
         // }
     }
-
-    public function render()
-    {
-        return view('jal::components.input');
-    }
 }

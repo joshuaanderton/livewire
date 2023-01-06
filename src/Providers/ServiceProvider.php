@@ -43,7 +43,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->loadTranslationsFrom(
             $this->path('lang'),
-            'jal'
+            'ja_livewire'
         );
 
         return $this;
@@ -82,7 +82,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->loadViewsFrom(
             $this->path('resources/views'),
-            'jal'
+            'ja-livewire'
         );
 
         return $this;

@@ -87,7 +87,7 @@ class Helper
         );
     }
 
-    public static function view(string $name, array $data = [])
+    public static function view(string $name, array $data = [], )
     {
         try {
             
@@ -98,7 +98,7 @@ class Helper
             //
         }
 
-        return view("jal::{$name}", $data);
+        return view("ja-livewire::{$name}", $data);
     }
 
     public static function route(string|array $route, array $params = [], bool $absolute = false)
