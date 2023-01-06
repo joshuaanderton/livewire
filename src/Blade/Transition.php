@@ -2,13 +2,14 @@
 
 namespace TallStackApp\Tools\Blade;
 
-use Illuminate\View\Component;
+use Exception;
+use TallStackApp\Tools\Blade as Component;
 
 class Transition extends Component
 {
-    public array $transition = [];
+    public array $transition;
 
-    private $transitionTags = [
+    private array $transitionAttrs = [
         'x-transition:enter',
         'x-transition:enter-start',
         'x-transition:enter-end',
@@ -19,13 +20,17 @@ class Transition extends Component
 
     public function __construct(array $transition)
     {
-        foreach ($transition as $i => $t) :
-            $this->transition[$this->transitionTags[$i]] = $t;
-        endforeach;
-    }
+        if (count($transition) !== ($countAttrs = count($this->transitionAttrs))) {
+            throw new Exception(
+                "Please provide transition classes for all {$countAttrs} x-transition: attributes (e.g. https://alpinejs.dev/directives/transition#applying-css-classes)"
+            );
+        }
 
-    public function render()
-    {
-        return view('tall::components.transition');
+        $this->transition = (
+            collect($this->transitionAttrs)
+                ->map(fn ($tag, $i) => [$tag => $transition[$i]])
+                ->collapse()
+                ->all()
+        );
     }
 }

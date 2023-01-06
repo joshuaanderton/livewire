@@ -18,7 +18,7 @@ class Input extends Component
 
     public string $type;
 
-    public ?string $model;
+    public ?string $name;
 
     public ?string $label;
 
@@ -50,7 +50,7 @@ class Input extends Component
 
     public function __construct(
     string $type = null,
-    string $model = null,
+    string $name = null,
     string $label = null,
     string $disclaimer = null,
     string $icon = null,
@@ -63,7 +63,7 @@ class Input extends Component
     bool $sm = null
   ) {
         $this->type = $type ?: 'text';
-        $this->model = $model;
+        $this->name = $name;
         $this->label = $label;
         $this->disclaimer = $disclaimer;
         $this->icon = $icon;
@@ -106,21 +106,21 @@ class Input extends Component
             $this->autocomplete = 'new-password';
         }
 
-        foreach ([
-            'first_name' => 'given-name',
-            'last_name' => 'family-name',
-            'phone_number' => 'tel',
-            'url' => 'url',
-        ] as $field => $value) {
-            if (
-                $this->model !== $field &&
-                !Str::contains($this->model, ".{$field}")
-            ) {
-                continue;
-            }
+        // foreach ([
+        //     'first_name' => 'given-name',
+        //     'last_name' => 'family-name',
+        //     'phone_number' => 'tel',
+        //     'url' => 'url',
+        // ] as $field => $value) {
+        //     if (
+        //         $this->model !== $field &&
+        //         !Str::contains($this->model, ".{$field}")
+        //     ) {
+        //         continue;
+        //     }
 
-            $this->autocomplete = $value;
-        }
+        //     $this->autocomplete = $value;
+        // }
     }
 
     public function render()

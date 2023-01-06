@@ -21,9 +21,11 @@ class Button extends Component
 
     protected array $translatable = ['text'];
 
-    protected array $routable = ['route'];
+    // protected array $routable = ['route'];
 
     public string $tag = 'button';
+
+    public ?string $type = null;
 
     public ?string $text, $icon, $href;
 
@@ -191,6 +193,7 @@ class Button extends Component
      * @return void
      */
     public function __construct(
+        string $type = null,
         string $text = null,
         string|array $route = null,
         string $href = null,
@@ -208,9 +211,10 @@ class Button extends Component
         bool $danger = null,
         bool $secondary = null,
         bool $outline = null,
-        bool $border = null
+        bool $border = null,
     )
     {
+        $this->type = $type;
         $this->text = $text;
         $this->icon = $icon;
         $this->class = $class;

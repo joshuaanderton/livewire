@@ -2,8 +2,8 @@
 
 namespace TallStackApp\Tools\Blade;
 
-use TallStackApp\Tools\Blade as Component;
 use TallStackApp\Tools\Blade\Traits\Translatable;
+use TallStackApp\Tools\Blade as Component;
 
 class Notification extends Component
 {

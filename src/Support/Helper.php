@@ -2,6 +2,8 @@
 
 namespace TallStackApp\Tools\Support;
 
+use Exception;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -67,6 +69,36 @@ class Helper
             'resources/views',
             ...$parameters
         );
+    }
+
+    public static function file(string $name, array $data = [])
+    {
+        try {
+            
+            // Check for override
+            return File::get("vendors/tallstackapp/{$name}");
+
+        } catch (Exception $e) {
+            //
+        }
+
+        return File::get(
+            static::packageViewsPath($name)
+        );
+    }
+
+    public static function view(string $name, array $data = [])
+    {
+        try {
+            
+            // Check for override
+            return view("vendors/tallstackapp/{$name}", $data);
+
+        } catch (Exception $e) {
+            //
+        }
+
+        return view("tall::{$name}", $data);
     }
 
     public static function route(string|array $route, array $params = [], bool $absolute = false)

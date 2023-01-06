@@ -2,7 +2,7 @@
 
 namespace TallStackApp\Tools\Blade;
 
-use Illuminate\View\Component;
+use TallStackApp\Tools\Blade as Component;
 
 class IconLoading extends Component
 {

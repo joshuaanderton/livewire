@@ -33,6 +33,7 @@
       {{ $attributes->merge([
         'type' => $type,
         'x-ref' => 'input',
+        'name' => $name,
         'autocomplete' => $autocomplete ?: null,
         'class' => $class, 
       ]) }}
@@ -54,7 +55,7 @@
     </div>
   @endif
 
-  @error($model)
+  @error($model ?: $name)
     <x-tall::validation-error :message="$message" />
   @enderror
     

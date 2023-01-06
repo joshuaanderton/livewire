@@ -11,6 +11,7 @@ use TallStackApp\Tools\Blade\Traits\Translatable;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
+use TallStackApp\Tools\Support\Helper as Tall;
 
 class Blade extends Component
 {
@@ -82,12 +83,8 @@ class Blade extends Component
                 $data['model'] = $wireModel;
             }
 
-            // Attempt to load bade theme override of component view
-            if (View::exists($view = "components.{$this->componentViewPath()}")) {
-                return view($view, $data)->render();
-            }
+            return Tall::view("components.{$this->componentViewPath()}", $data)->render();
 
-            return view("tall::components.{$this->componentViewPath()}", $data)->render();
         };
     }
 
