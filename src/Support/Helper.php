@@ -1,6 +1,6 @@
 <?php
 
-namespace TallStackApp\Tools\Support;
+namespace Ja\Livewire\Support;
 
 use Exception;
 use Illuminate\Support\Facades\File;
@@ -76,7 +76,7 @@ class Helper
         try {
             
             // Check for override
-            return File::get("vendors/tallstackapp/{$name}");
+            return File::get("vendors/ja-livewire/{$name}");
 
         } catch (Exception $e) {
             //
@@ -92,13 +92,13 @@ class Helper
         try {
             
             // Check for override
-            return view("vendors/tallstackapp/{$name}", $data);
+            return view("vendors/ja-livewire/{$name}", $data);
 
         } catch (Exception $e) {
             //
         }
 
-        return view("tall::{$name}", $data);
+        return view("jal::{$name}", $data);
     }
 
     public static function route(string|array $route, array $params = [], bool $absolute = false)

@@ -14,7 +14,7 @@
 
     @if ($icon)
       <div class="flex items-center justify-center pl-3 text-gray-300">
-        <x-tall::icon :name="$icon" />
+        <x-jal::icon :name="$icon" />
       </div>
     @endif
 
@@ -56,7 +56,7 @@
   @endif
 
   @error($model ?: $name)
-    <x-tall::validation-error :message="$message" />
+    <x-jal::validation-error :message="$message" />
   @enderror
     
 </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace TallStackApp\Tools\Actions;
+namespace Ja\Livewire\Actions;
 
 
 class Batch

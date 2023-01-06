@@ -17,12 +17,12 @@
         class="{{ $buttonCssClasses }}"
       >
         <span>{{ $button }}</span>
-        <x-tall::icon name="chevron-down" sm />
+        <x-jal::icon name="chevron-down" sm />
       </button>
     @endif
   </div>
 
-  <x-tall::transition
+  <x-jal::transition
     x-show="open"
     :transition="[
       'transition ease-out duration-200',
@@ -41,6 +41,6 @@
     <div class="py-1" role="none">
       {{ $slot }}
     </div>
-  </x-tall::transition>
+  </x-jal::transition>
 
 </div>

@@ -1,8 +1,8 @@
 <?php
 
-namespace TallStackApp\Tools\Blade\Traits;
+namespace Ja\Livewire\Blade\Traits;
 
-use TallStackApp\Tools\Support\Blade as JaBlade;
+use Ja\Livewire\Support\Blade as JaBlade;
 
 trait Mergeable
 {

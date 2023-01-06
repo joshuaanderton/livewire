@@ -1,6 +1,6 @@
 <?php
 
-namespace TallStackApp\Tools\Contracts\Traits;
+namespace Ja\Livewire\Contracts\Traits;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;

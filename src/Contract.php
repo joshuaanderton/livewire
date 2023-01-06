@@ -1,9 +1,9 @@
 <?php
 
-namespace TallStackApp\Tools;
+namespace Ja\Livewire;
 
-use TallStackApp\Tools\Contracts\Traits\WithActionValidate;
-use TallStackApp\Tools\Contracts\Traits\WithLivewireRulePrefix;
+use Ja\Livewire\Contracts\Traits\WithActionValidate;
+use Ja\Livewire\Contracts\Traits\WithLivewireRulePrefix;
 
 abstract class Contract
 {

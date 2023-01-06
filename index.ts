@@ -9,7 +9,7 @@ import {
 
 export default () => ({
 
-  name: 'tall',
+  name: 'ja-livewire',
   
   config: (config: UserConfig, { mode, command }: { mode: string, command: string }) => {
 

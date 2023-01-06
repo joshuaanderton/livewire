@@ -1,8 +1,8 @@
 <?php
 
-namespace TallStackApp\Tools\Blade\Traits;
+namespace Ja\Livewire\Blade\Traits;
 
-use TallStackApp\Tools\Support\Helper as Tall;
+use Ja\Livewire\Support\Helper as Tall;
 
 trait Routable
 {

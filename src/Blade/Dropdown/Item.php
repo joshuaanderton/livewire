@@ -1,10 +1,10 @@
 <?php
 
-namespace TallStackApp\Tools\Blade\Dropdown;
+namespace Ja\Livewire\Blade\Dropdown;
 
-use TallStackApp\Tools\Blade\Traits\Routable;
-use TallStackApp\Tools\Blade\Traits\Translatable;
-use TallStackApp\Tools\Blade as Component;
+use Ja\Livewire\Blade\Traits\Routable;
+use Ja\Livewire\Blade\Traits\Translatable;
+use Ja\Livewire\Blade as Component;
 
 class Item extends Component
 {

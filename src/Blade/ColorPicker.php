@@ -1,8 +1,8 @@
 <?php
 
-namespace TallStackApp\Tools\Blade;
+namespace Ja\Livewire\Blade;
 
-use TallStackApp\Tools\Blade as Component;
+use Ja\Livewire\Blade as Component;
 
 class ColorPicker extends Component
 {
@@ -34,13 +34,13 @@ class ColorPicker extends Component
                 }"
             >
                 @if ($label)
-                    <x-tall::label :text="$label" />
+                    <x-jal::label :text="$label" />
                 @endif
                 <div class="relative">
                     <div class="rounded-l absolute inset-y-0 left-0 w-10 h-full hover:cursor-pointer z-10" :style="{ backgroundColor: color }">
                         <input type="color" x-model="color" class="absolute inset-0 opacity-0" />
                     </div>
-                    <x-tall::input x-model="color" class="!pl-12" />
+                    <x-jal::input x-model="color" class="!pl-12" />
                 </div>
             </div>
         blade;

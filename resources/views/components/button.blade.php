@@ -1,7 +1,7 @@
 <{{ $tag }} {{ $attributes->merge(['type' => $type, 'href' => $href]) }} {!! $confirm ? 'x-data x-button-confirm' : '' !!}>
 
     @if ($icon)
-        <x-tall::icon :type="null" :class="null" :name="$icon" />
+        <x-jal::icon :type="null" :class="null" :name="$icon" />
     @endif
 
     @if ($text || $slot->isNotEmpty())
@@ -16,7 +16,7 @@
     @endif
 
     @if ($attributes['wire:click'])
-        <x-tall::icon-loading
+        <x-jal::icon-loading
             wire:loading
             :wire:target="$attributes['wire:click']"
             class="h-5 w-5" />

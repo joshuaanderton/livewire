@@ -1,6 +1,6 @@
 <?php
 
-namespace TallStackApp\Tools;
+namespace Ja\Livewire;
 
 use Livewire\Component as LivewireComponent;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace TallStackApp\Tools\Blade;
+namespace Ja\Livewire\Blade;
 
-use TallStackApp\Tools\Blade\Traits\Routable;
-use TallStackApp\Tools\Blade as Component;
-use TallStackApp\Tools\Blade\Traits\Translatable;
+use Ja\Livewire\Blade\Traits\Routable;
+use Ja\Livewire\Blade as Component;
+use Ja\Livewire\Blade\Traits\Translatable;
 
 class Link extends Component
 {

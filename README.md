@@ -1,7 +1,7 @@
-## Tools for making wicked-awesome TALL stack apps
+## Tools for making great SaaS apps with Livewire + Laravel
 
 ```
-composer require tallstackapp/tools
+composer require joshuaanderton/livewire
 ```
 
 Import component JS and CSS dependencies:
@@ -9,21 +9,16 @@ Import component JS and CSS dependencies:
 // ./vite.config.ts
 import { defineConfig } from 'vite'
 import laravel from 'laravel-vite-plugin'
-import tall from './vendor/tallstackapp/tools'
+import jaLivewire from './vendor/joshuaanderton/livewire'
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            input: [
-                'resources/js/app.js',
-                'resources/css/app.css',
-                'resources/js/legacy.js',
-                'resources/scss/legacy.scss',
-            ],
-            refresh: true,
-        }),
-        tall()
-    ]
+  plugins: [
+    laravel({
+      input: ['resources/js/app.js'],
+      refresh: true,
+    }),
+    jaLivewire()
+  ]
 })
 ```
 
@@ -35,7 +30,7 @@ module.exports = {
   darkMode: 'class',
 	content: [
 		'./resources/views/**/*.blade.php',
-    './vendor/tallstackapp/tools/**/*.blade.php',
+    './vendor/joshuaanderton/livewire/**/*.blade.php',
 	],
   ...
 ```
@@ -45,12 +40,12 @@ Tons of reuseable & extendible components (via TailwindCSS + AlpineJS).
 
 #### Icons (via [tailwindlabs/heroicons](https://github.com/tailwindlabs/heroicons))
 ```
-<x-tall::icon name="bug-ant" outline />
+<x-jal::icon name="bug-ant" outline />
 ```
 
 #### Buttons
 ```
-<x-tall::button
+<x-jal::button
   :route="['products.show', $product]"  // Route uri is retrieved (if exists) and rendered as href="" attribute
   text="products.view_product"          // Text attribute translated (if translation exists)
   icon="cart"                           // Icon component utilized within
@@ -58,5 +53,5 @@ Tons of reuseable & extendible components (via TailwindCSS + AlpineJS).
   lg />
 
 // Slot supported too of course!
-<x-tall::button href="products">View Products</x-tall::button>
+<x-jal::button href="products">View Products</x-jal::button>
 ```

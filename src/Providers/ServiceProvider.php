@@ -1,15 +1,16 @@
 <?php
 
-namespace TallStackApp\Tools\Providers;
+namespace Ja\Livewire\Providers;
 
-use TallStackApp\Tools\Blade as TallBlade;
-use TallStackApp\Tools\Livewire as TallLivewire;
+use Ja\Livewire\Blade as JaBlade;
+use Ja\Livewire\Livewire as JaLivewire;
 
 use Livewire\Livewire;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Ja\Livewire\Support\TagCompiler;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -25,7 +26,8 @@ class ServiceProvider extends BaseServiceProvider
             ->loadTranslations()
             ->loadViews()
             ->loadBladeComponents()
-            ->loadLivewireComponents();
+            ->loadLivewireComponents()
+            ->loadCustomTagCompiler();
     }
 
     private function loadRoutes()
@@ -41,7 +43,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->loadTranslationsFrom(
             $this->path('lang'),
-            'tall'
+            'jal'
         );
 
         return $this;
@@ -49,7 +51,7 @@ class ServiceProvider extends BaseServiceProvider
 
     private function loadBladeComponents(): self
     {
-        Blade::componentNamespace(TallBlade::class, 'tall');
+        Blade::componentNamespace(JaBlade::class, 'jal');
 
         return $this;
     }
@@ -57,10 +59,21 @@ class ServiceProvider extends BaseServiceProvider
     private function loadLivewireComponents(): self
     {
         collect([
-            'notifications' => TallLivewire\Notifications::class,
+            'notifications' => JaLivewire\Notifications::class,
         ])->each(fn ($class, $key) => (
-            Livewire::component("tall-{$key}", $class)
+            Livewire::component("jal-{$key}", $class)
         ));
+
+        return $this;
+    }
+
+    protected function loadCustomTagCompiler(): self
+    {
+        if (method_exists($this->app['blade.compiler'], 'precompiler')) {
+            $this->app['blade.compiler']->precompiler(function ($string) {
+                return app(TagCompiler::class)->compile($string);
+            });
+        }
 
         return $this;
     }
@@ -69,7 +82,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->loadViewsFrom(
             $this->path('resources/views'),
-            'tall'
+            'jal'
         );
 
         return $this;
@@ -83,16 +96,16 @@ class ServiceProvider extends BaseServiceProvider
             collect([
 
                 // Old namespace
-                \Ja\Tall\Blade::class                     => \TallStackApp\Tools\Blade::class,
-                \Ja\Tall\Blade\Traits\CssClassable::class => \TallStackApp\Tools\Blade\Traits\CssClassable::class,
-                \Ja\Tall\Blade\Traits\Mergeable::class    => \TallStackApp\Tools\Blade\Traits\Mergeable::class,
-                \Ja\Tall\Blade\Traits\Routable::class     => \TallStackApp\Tools\Blade\Traits\Routable::class,
-                \Ja\Tall\Blade\Traits\Translatable::class => \TallStackApp\Tools\Blade\Traits\Translatable::class,
-                \Ja\Tall\Blade\Traits\WithHooks::class    => \TallStackApp\Tools\Blade\Traits\WithHooks::class,
-                \Ja\Tall\Support\Helper::class            => \TallStackApp\Tools\Support\Helper::class,
+                \Ja\Tall\Blade::class                     => \Ja\Livewire\Blade::class,
+                \Ja\Tall\Blade\Traits\CssClassable::class => \Ja\Livewire\Blade\Traits\CssClassable::class,
+                \Ja\Tall\Blade\Traits\Mergeable::class    => \Ja\Livewire\Blade\Traits\Mergeable::class,
+                \Ja\Tall\Blade\Traits\Routable::class     => \Ja\Livewire\Blade\Traits\Routable::class,
+                \Ja\Tall\Blade\Traits\Translatable::class => \Ja\Livewire\Blade\Traits\Translatable::class,
+                \Ja\Tall\Blade\Traits\WithHooks::class    => \Ja\Livewire\Blade\Traits\WithHooks::class,
+                \Ja\Tall\Support\Helper::class            => \Ja\Livewire\Support\Helper::class,
 
                 // Helper class
-                \Tall::class                              => \TallStackApp\Tools\Support\Helper::class,
+                \Tall::class                              => \Ja\Livewire\Support\Helper::class,
                 
             ])->map(fn ($class, $namespace) => (
                 $loader->alias(

@@ -8,7 +8,7 @@
   ])
 ]) }}>
   @if ($icon)
-    <x-tall::icon library="fontawesome" :name="$icon" :type="$iconType" class="fa-fw mr-2" />
+    <x-jal::icon library="fontawesome" :name="$icon" :type="$iconType" class="fa-fw mr-2" />
   @endif
   <span>{{ $text }}{{ $slot }}</span>
 </{{ $tag }}>

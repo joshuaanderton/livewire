@@ -1,6 +1,6 @@
 <?php
 
-namespace TallStackApp\Tools\Blade\Traits;
+namespace Ja\Livewire\Blade\Traits;
 
 use Illuminate\Support\Arr;
 

@@ -1,15 +1,15 @@
 <div>
     
     @if ($successMessage)
-        <x-tall::notification :text="$successMessage" success />
+        <x-jal::notification :text="$successMessage" success />
     @endif
 
     @if ($errorMessage)
-        <x-tall::notification :text="$errorMessage" error />
+        <x-jal::notification :text="$errorMessage" error />
     @endif
 
     @if ($infoMessage)
-        <x-tall::notification :text="$infoMessage" persist />
+        <x-jal::notification :text="$infoMessage" persist />
     @endif
 
 </div>

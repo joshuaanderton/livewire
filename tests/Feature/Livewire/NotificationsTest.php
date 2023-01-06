@@ -1,8 +1,8 @@
 <?php
 
-namespace TallStackApp\Tools\Tests\Feature\Livewire;
+namespace Ja\Livewire\Tests\Feature\Livewire;
 
-use TallStackApp\Tools\Livewire\Notifications;
+use Ja\Livewire\Livewire\Notifications;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;

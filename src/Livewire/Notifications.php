@@ -1,6 +1,6 @@
 <?php
 
-namespace TallStackApp\Tools\Livewire;
+namespace Ja\Livewire\Livewire;
 
 use Livewire\Component;
 
@@ -50,6 +50,6 @@ class Notifications extends Component
 
     public function render()
     {
-        return view('tall::livewire.notifications');
+        return view('jal::livewire.notifications');
     }
 }

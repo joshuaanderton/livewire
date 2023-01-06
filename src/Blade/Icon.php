@@ -1,12 +1,12 @@
 <?php
 
-namespace TallStackApp\Tools\Blade;
+namespace Ja\Livewire\Blade;
 
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
-use TallStackApp\Tools\Support\Helper as Tall;
-use TallStackApp\Tools\Blade as Component;
+use Ja\Livewire\Support\Helper as Tall;
+use Ja\Livewire\Blade as Component;
 
 class Icon extends Component
 {
@@ -91,7 +91,7 @@ class Icon extends Component
 
         } else {
 
-            $this->library = config('tallstackapp.tools.icon_library', 'heroicons');
+            $this->library = 'heroicons';
 
         }
 

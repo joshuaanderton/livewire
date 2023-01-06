@@ -1,14 +1,14 @@
 <?php
 
-namespace TallStackApp\Tools\Blade;
+namespace Ja\Livewire\Blade;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Lang;
-use TallStackApp\Tools\Blade\Traits\Mergeable;
-use TallStackApp\Tools\Blade\Traits\CssClassable;
-use TallStackApp\Tools\Blade\Traits\Routable;
-use TallStackApp\Tools\Blade\Traits\Translatable;
-use TallStackApp\Tools\Blade as Component;
+use Ja\Livewire\Blade\Traits\Mergeable;
+use Ja\Livewire\Blade\Traits\CssClassable;
+use Ja\Livewire\Blade\Traits\Routable;
+use Ja\Livewire\Blade\Traits\Translatable;
+use Ja\Livewire\Blade as Component;
 
 class Button extends Component
 {
@@ -231,7 +231,7 @@ class Button extends Component
         $this->outline = !! $outline;
         $this->border = $border === null ? true : $border;
         $this->confirm = !! $confirm;
-        $this->confirmText = $confirmText ?: (Lang::has('components.are_you_sure') ? __('components.are_you_sure') : __('tall::components.are_you_sure'));
+        $this->confirmText = $confirmText ?: (Lang::has('components.are_you_sure') ? __('components.are_you_sure') : __('jal::components.are_you_sure'));
 
         if (! $this->href && $route) :
             $this->href = $this->route($route);

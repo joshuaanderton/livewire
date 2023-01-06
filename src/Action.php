@@ -1,6 +1,6 @@
 <?php
 
-namespace TallStackApp\Tools;
+namespace Ja\Livewire;
 
 use Lorisleiva\Actions\Concerns\AsController;
 use Lorisleiva\Actions\Concerns\AsObject;

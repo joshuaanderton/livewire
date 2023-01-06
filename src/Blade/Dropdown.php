@@ -1,9 +1,9 @@
 <?php
 
-namespace TallStackApp\Tools\Blade;
+namespace Ja\Livewire\Blade;
 
 use Illuminate\Support\Str;
-use TallStackApp\Tools\Blade as Component;
+use Ja\Livewire\Blade as Component;
 
 class Dropdown extends Component
 {

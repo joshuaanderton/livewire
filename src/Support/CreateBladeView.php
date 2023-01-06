@@ -1,6 +1,6 @@
 <?php
 
-namespace Blazervel\Ui\Support;
+namespace Ja\Livewire\Support;
 
 use Illuminate\View\Component;
 

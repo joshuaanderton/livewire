@@ -1,10 +1,10 @@
 <?php
 
-namespace Blazervel\Ui\Support;
+namespace Ja\Livewire\Support;
 
 use Illuminate\View\Compilers\ComponentTagCompiler;
 use InvalidArgumentException;
-use Blazervel\Ui\Ui;
+use Ja\Livewire\Livewire as JaLivewire;
 
 class TagCompiler extends ComponentTagCompiler
 {
@@ -22,7 +22,7 @@ class TagCompiler extends ComponentTagCompiler
         $pattern = "/
       <
         \s*
-        tall[-\:]([\w\-\:\.]*)
+        blade[-\:]([\w\-\:\.]*)
         (?<attributes>
           (?:
             \s+
@@ -74,7 +74,7 @@ class TagCompiler extends ComponentTagCompiler
         $pattern = "/
       <
         \s*
-        tall[-\:]([\w\-\:\.]*)
+        blade[-\:]([\w\-\:\.]*)
         \s*
         (?<attributes>
           (?:
@@ -115,13 +115,15 @@ class TagCompiler extends ComponentTagCompiler
 
     public function componentClass(string $component)
     {
-        if ($class = Ui::componentLookup($component)) {
-            return $class;
-        }
+        dd($component);
 
-        if ($view = Ui::viewLookup($component)) {
-            return $view;
-        }
+        // if ($class = JaLivewire::componentLookup($component)) {
+        //     return $class;
+        // }
+
+        // if ($view = JaLivewire::viewLookup($component)) {
+        //     return $view;
+        // }
 
         throw new InvalidArgumentException(
             "Unable to locate a class or view for component [{$component}]."

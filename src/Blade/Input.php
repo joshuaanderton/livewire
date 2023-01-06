@@ -1,13 +1,13 @@
 <?php
 
-namespace TallStackApp\Tools\Blade;
+namespace Ja\Livewire\Blade;
 
 use Illuminate\Support\Str;
-use TallStackApp\Tools\Blade\Traits\Mergeable;
-use TallStackApp\Tools\Blade\Traits\CssClassable;
-use TallStackApp\Tools\Blade\Traits\Routable;
-use TallStackApp\Tools\Blade\Traits\Translatable;
-use TallStackApp\Tools\Blade as Component;
+use Ja\Livewire\Blade\Traits\Mergeable;
+use Ja\Livewire\Blade\Traits\CssClassable;
+use Ja\Livewire\Blade\Traits\Routable;
+use Ja\Livewire\Blade\Traits\Translatable;
+use Ja\Livewire\Blade as Component;
 
 class Input extends Component
 {
@@ -125,6 +125,6 @@ class Input extends Component
 
     public function render()
     {
-        return view('tall::components.input');
+        return view('jal::components.input');
     }
 }

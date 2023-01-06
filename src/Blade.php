@@ -1,17 +1,17 @@
 <?php
 
-namespace TallStackApp\Tools;
+namespace Ja\Livewire;
 
 use Closure;
 use Exception;
-use TallStackApp\Tools\Support\Blade as TallBlade;
-use TallStackApp\Tools\Blade\Traits\Mergeable;
-use TallStackApp\Tools\Blade\Traits\CssClassable;
-use TallStackApp\Tools\Blade\Traits\Translatable;
+use Ja\Livewire\Support\Blade as TallBlade;
+use Ja\Livewire\Blade\Traits\Mergeable;
+use Ja\Livewire\Blade\Traits\CssClassable;
+use Ja\Livewire\Blade\Traits\Translatable;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
-use TallStackApp\Tools\Support\Helper as Tall;
+use Ja\Livewire\Support\Helper as Tall;
 
 class Blade extends Component
 {
@@ -43,7 +43,7 @@ class Blade extends Component
             $baseComponentsNamespace = self::class;
         }
 
-        $viewPath = $componentClass;                                               // TallStackApp\Tools\Blade as Components\Modals\ModalHeader (example)
+        $viewPath = $componentClass;                                               // Ja\Livewire\Blade as Components\Modals\ModalHeader (example)
         $viewPath = Str::remove("{$baseComponentsNamespace}\\", $viewPath);        // Modals\ModalHeader
         $viewPath = explode('\\', $viewPath);                                      // ['Modals', 'ModalHeader']
         $viewPath = collect($viewPath)->map(fn ($slug) => Str::snake($slug, '-')); // ['modals', 'modal-header']

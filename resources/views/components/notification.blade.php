@@ -15,7 +15,7 @@
 >
     <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
 
-        <x-tall::transition
+        <x-jal::transition
             x-show="open"
             :transition="[
                 'transform ease-out duration-300 transition',
@@ -51,9 +51,9 @@
                 <div @click="open = false" class="group bg-white p-4 flex items-start">
                     <div class="flex-shrink-0">
                         @if ($success)
-                            <x-tall::icon name="check-circle" class="text-green-400" />
+                            <x-jal::icon name="check-circle" class="text-green-400" />
                         @else
-                            <x-tall::icon name="info-circle" class="text-sky-400" />
+                            <x-jal::icon name="info-circle" class="text-sky-400" />
                         @endif
                     </div>
                     <div class="ml-3 w-0 flex-1">
@@ -72,7 +72,7 @@
                 </div>
             @endif
 
-        </x-tall::transition>
+        </x-jal::transition>
 
     </div>
 </div>

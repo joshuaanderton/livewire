@@ -1,6 +1,6 @@
 <?php
 
-namespace TallStackApp\Tools\Support;
+namespace Ja\Livewire\Support;
 
 use Exception;
 use Illuminate\View\Component as BladeComponent;
