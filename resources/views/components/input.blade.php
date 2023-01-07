@@ -3,13 +3,13 @@
 <div x-data class="{{ $wrapperClass }}">
 
   @if ($label)
-    <x-label x-on:click="$refs.input.select()" :text="$label" />
+    <x-jal::label x-on:click="$refs.input.select()" :text="$label" />
   @endif
 
   <div class="{{ $label ? 'mt-2' : '' }} flex border border-gray-200 rounded {{ ($attributes['disabled'] ?? false) ? 'bg-gray-200' : 'bg-white' }} focus-within:ring-1 focus-within:ring-gray-200 focus-within:border-gray-200 {{ $sm ? 'h-8' : 'h-10' }}">
     
     @if ($icon || $prepend)
-      <label x-on:click="$refs.input.select()" class="flex m-0 select-none cursor-text {{ $sm ? 'text-sm' : '' }}">
+      <span x-on:click="$refs.input.select()" class="flex m-0 select-none cursor-text {{ $sm ? 'text-sm' : '' }}">
     @endif
 
     @if ($icon)
@@ -25,7 +25,7 @@
     @endif
 
     @if ($icon || $prepend)
-      </label>
+      </span>
     @endif
 
     <input 
