@@ -110,7 +110,7 @@ class Icon extends Component
                     'h-auto',
                     'w-2.5' => $this->xs,
                     'w-3.5' => $this->sm,
-                    'w-5' => ! ($this->xs ?: $this->sm ?: $this->md ?: $this->lg),
+                    'w-4' => ! ($this->xs ?: $this->sm ?: $this->md ?: $this->lg),
                     'w-7' => $this->md,
                     'w-8' => $this->lg,
                     'inline-block',

@@ -20,6 +20,8 @@ class Input extends Component
 
     public string $type;
 
+    public string $id;
+
     public ?string $name;
 
     public ?string $label;
@@ -54,6 +56,7 @@ class Input extends Component
 
     public function __construct(
         string $type = null,
+        string $id = null,
         string $name = null,
         string $label = null,
         string $placeholder = null,
@@ -68,6 +71,7 @@ class Input extends Component
         bool $sm = null
     ) {
         $this->type = $type ?: 'text';
+        $this->id = $id ?: $name ?: uniqid();
         $this->name = $name;
         $this->label = $label;
         $this->placeholder = $placeholder;
