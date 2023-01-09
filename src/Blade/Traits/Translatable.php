@@ -15,13 +15,7 @@ trait Translatable
      */
     // protected array $translatable = [];
 
-    /**
-     * Translate translatable fields
-     * 
-     * @var array $translatable
-     * @return array
-     */
-    protected function getTranslatable(array $translatable = null): array
+    protected function beforeRenderTranslatable(array $translatable = null): array
     {
         if ($this->translatable ?? false) {
             $translatable = collect($this->translatable)

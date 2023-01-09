@@ -16,11 +16,15 @@ class Input extends Component
         Mergeable,
         Translatable;
 
+    protected $translatable = ['label', 'placeholder', 'disclaimer'];
+
     public string $type;
 
     public ?string $name;
 
     public ?string $label;
+
+    public ?string $placeholder;
 
     public ?string $disclaimer;
 
@@ -49,27 +53,33 @@ class Input extends Component
     ];
 
     public function __construct(
-    string $type = null,
-    string $name = null,
-    string $label = null,
-    string $disclaimer = null,
-    string $icon = null,
-    string $prepend = null,
-    string $class = '',
-    string $wrapperClass = null,
-    bool $spaceAbove = null,
-    string $autocomplete = null,
-    bool $small = null, // deprecating
-    bool $sm = null
-  ) {
+        string $type = null,
+        string $name = null,
+        string $label = null,
+        string $placeholder = null,
+        string $disclaimer = null,
+        string $icon = null,
+        string $prepend = null,
+        string $class = '',
+        string $wrapperClass = null,
+        bool $spaceAbove = null,
+        string $autocomplete = null,
+        bool $small = null, // deprecating
+        bool $sm = null
+    ) {
         $this->type = $type ?: 'text';
         $this->name = $name;
         $this->label = $label;
+        $this->placeholder = $placeholder;
         $this->disclaimer = $disclaimer;
         $this->icon = $icon;
         $this->prepend = $prepend;
         $this->spaceAbove = $spaceAbove;
-        $this->sm = $small ?: (!! $sm);
+        $this->sm = !! $sm;
+
+        if ($sm === null && $small !== null) {
+            $this->sm = $small;
+        }
 
         $this->class = $this->classes($class);
         $this->wrapperClass = $wrapperClass;

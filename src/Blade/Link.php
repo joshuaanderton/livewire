@@ -8,8 +8,9 @@ use Ja\Livewire\Blade\Traits\Translatable;
 
 class Link extends Component
 {
-    use Routable, Translatable;
-    
+    use Routable,
+        Translatable;
+
     protected array $translatable = ['text'];
 
     public string $href;
@@ -31,16 +32,5 @@ class Link extends Component
         $this->href = $href;
         $this->text = $text;
         $this->if = $if === null ? true : $if;
-    }
-
-    public function render()
-    {
-        if (! $this->if) {
-            return '';
-        }
-
-        return <<<'blade'
-            <a {{ $attributes->merge(compact('href')) }}>{{ $text }}{{ $slot }}</a>
-        blade;
     }
 }

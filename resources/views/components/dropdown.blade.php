@@ -3,7 +3,7 @@
   'class' => $class,
   'x-on:click' => 'open = true',
   'x-on:click.away' => 'open = false',
-  'x-init' => $xShow ? '$watch("open", value => $data.' . $xShow . ' = value) }' : null,
+  'x-init' => $xShow ? '$watch("open", value => $data.' . $xShow . ' = value)' : null,
 ]) }}>
 
   <div>

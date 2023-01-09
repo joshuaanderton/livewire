@@ -73,13 +73,8 @@ class Helper
 
     public static function file(string $name, array $data = [])
     {
-        try {
-            
-            // Check for override
-            return File::get("vendors/ja-livewire/{$name}");
-
-        } catch (Exception $e) {
-            //
+        if (File::exists($override = "vendors/ja-livewire/{$name}")) {
+            return File::get($override);
         }
 
         return File::get(
@@ -89,13 +84,8 @@ class Helper
 
     public static function view(string $name, array $data = [], )
     {
-        try {
-            
-            // Check for override
-            return view("vendors/ja-livewire/{$name}", $data);
-
-        } catch (Exception $e) {
-            //
+        if (view()->exists($override = "vendors/ja-livewire/{$name}")) {
+            return view($override, $data);
         }
 
         return view("ja-livewire::{$name}", $data);

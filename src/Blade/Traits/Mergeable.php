@@ -19,7 +19,7 @@ trait Mergeable
      * @var array $mergeable
      * @return array
      */
-    protected function getMergeable(array $mergeable = null): array
+    protected function beforeRenderMergeable(array $mergeable = null): array
     {
         $this->except = array_merge($this->except, [
             'mergeable'

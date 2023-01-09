@@ -6,7 +6,7 @@
     <x-jal::label x-on:click="$refs.input.select()" :text="$label" />
   @endif
 
-  <div class="{{ $label ? 'mt-2' : '' }} flex border border-gray-200 rounded {{ ($attributes['disabled'] ?? false) ? 'bg-gray-200' : 'bg-white' }} focus-within:ring-1 focus-within:ring-gray-200 focus-within:border-gray-200 {{ $sm ? 'h-8' : 'h-10' }}">
+  <div class="{{ $label ? 'mt-2' : '' }} {{ ($attributes['disabled'] ?? false) ? 'bg-gray-200' : 'bg-white' }} flex border border-gray-200 rounded focus-within:ring-1 focus-within:ring-gray-200 focus-within:border-gray-200">
     
     @if ($icon || $prepend)
       <span x-on:click="$refs.input.select()" class="flex m-0 select-none cursor-text {{ $sm ? 'text-sm' : '' }}">
@@ -14,7 +14,7 @@
 
     @if ($icon)
       <div class="flex items-center justify-center pl-3 text-gray-300">
-        <x-jal::icon :name="$icon" />
+        <x-jal::icon :type="null" :class="null" :name="$icon" />
       </div>
     @endif
 

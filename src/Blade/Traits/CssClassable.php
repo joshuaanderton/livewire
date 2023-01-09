@@ -18,7 +18,7 @@ trait CssClassable
      * 
      * @return array
      */
-    protected function getCssClassable(): array
+    protected function beforeRenderCssClassable(): array
     {
         $this->except = array_merge($this->except, [
             'cssClasses'

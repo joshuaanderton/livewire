@@ -1,0 +1,1 @@
+<a {{ $attributes->merge(compact('href')) }}>{{ $text }}{{ $slot }}</a>

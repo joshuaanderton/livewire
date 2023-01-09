@@ -66,7 +66,6 @@ class Icon extends Component
         bool $md = null,
         bool $lg = null
     ) {
-        
         $this->if = $if === null ? true : $if;
 
         if (! $this->if) {
@@ -83,21 +82,23 @@ class Icon extends Component
         if ($library) {
             
             $this->library = $library;
+            $this->type = $type ?: $this->typeDefaults[$this->library];
 
         } elseif ($this->hasFontAwesomeKeys()) {
 
             $this->library = 'fontawesome';
+            $this->type = $type ?: $this->typeDefaults[$this->library];
+
             $this->translateFontAwesomeKeys();
 
         } else {
 
             $this->library = 'heroicons';
+            $this->type = $type ?: $this->typeDefaults[$this->library];
 
         }
 
-        $this->type = $type ?: $this->typeDefaults[$this->library];
-
-        $this->validate();
+        // $this->validate();
 
         switch ($this->library) {
             case 'fontawesome':
