@@ -15,7 +15,6 @@ trait Routable
 
     protected function beforeRenderRoutable(array $routable = null): array
     {
-        dd($this);
         if ($this->routable ?? false) {
             $routable = (
                 collect($this->routable)
