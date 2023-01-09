@@ -1,6 +1,6 @@
 @php
   $model = $attributes->wire('model')->value();
-  $id = $model ?: $name ?: uniqueId();
+  $id = $model ?: $name ?: (string) Str::orderedUuid();
   $class = $label ? "{$class} mt-2" : $class;
 @endphp
 

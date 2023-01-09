@@ -1,17 +1,42 @@
-<{{ $tag }} {{ $attributes->merge(['type' => $type, 'href' => $href]) }} {!! $confirm ? 'x-data x-button-confirm' : '' !!}>
+@php
+    $confirm = false;
+    if ($confirm) {
+        $attributes['x-data'] = "{
+            confirming: false,
+            init() {
+                \$el.addEventListener('click', event => {
+                    if (\$data.confirming === false) {
+                        \$data.confirming = true
+
+                        event.preventDefault()
+                        return false
+                    }
+
+                    \$data.confirming = false;
+                })
+            } 
+        }";
+    }
+@endphp
+
+<{{ $tag }} {{ $attributes->merge(['type' => $type, 'href' => $href]) }}>
 
     @if ($icon)
         <x-jal::icon :type="null" :class="null" :name="$icon" />
     @endif
 
     @if ($text || $slot->isNotEmpty())
-        @if ($confirm)
-            <span class="flex-1 {{ !Str::contains($attributes['class'], 'text-center') ? 'text-left' : '' }}" x-show="confirming">
-                {{ $confirmText }}
-            </span>
-        @endif
-        <span class="flex-1 {{ !Str::contains($attributes['class'], 'text-center') ? 'text-left' : '' }}" {!! $confirm ? 'x-show="!confirming"' : '' !!}>
-            {{ $text }}{{ $slot }}
+        <span class="flex-1 {{ !Str::contains($attributes['class'], 'text-center') ? 'text-left' : '' }}">
+            @if ($confirm)
+                <span x-show="confirming">
+                    {{ $confirmText }}
+                </span>
+                <span {!! $confirm ? 'x-show="confirming !== true"' : '' !!}>
+                    {{ $text }}{{ $slot }}
+                </span>
+            @else
+                {{ $text }}{{ $slot }}
+            @endif
         </span>
     @endif
 
