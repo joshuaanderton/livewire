@@ -7,10 +7,10 @@
 <div class="{{ $wrapperClass }}">
 
   @if ($label)
-    <x-label for="{{ $id }}" :text="$label" />
+    <x-jal::label for="{{ $id }}" :text="$label" />
   @endif
 
-  <select wire:ignore {{ $attributes->merge(compact('type', 'name', 'class', 'id')) }}>
+  <select {{ $attributes->merge(compact('type', 'name', 'class', 'id')) }}>
     @if ($slot->isNotEmpty())
       {!! $slot !!}
     @endif

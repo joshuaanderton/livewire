@@ -28,16 +28,13 @@
       </span>
     @endif
 
-    <input 
-      wire:ignore
-      {{ $attributes->merge([
-        'type' => $type,
-        'x-ref' => 'input',
-        'name' => $name,
-        'autocomplete' => $autocomplete ?: null,
-        'class' => $class, 
-      ]) }}
-    />
+    <input {{ $attributes->merge([
+      'type' => $type,
+      'x-ref' => 'input',
+      'name' => $name,
+      'autocomplete' => $autocomplete ?: null,
+      'class' => $class, 
+    ]) }} />
 
     @if ($slot->isNotEmpty())
       {!! $slot !!}

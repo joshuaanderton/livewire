@@ -4,6 +4,8 @@ namespace Ja\Livewire\Blade;
 
 class Select extends Input
 {
+    public array $options = [];
+    
     public $cssClasses = [
         'block',
         'w-full',
