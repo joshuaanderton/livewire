@@ -16,7 +16,7 @@ trait Petiteable
 
     public string $script = '<script src="https://unpkg.com/petite-vue" defer init></script>';
 
-    private function getPetite(): string
+    private function beforeRenderPetite(array $data): string
     {
         return json_encode($this->petite);
     }

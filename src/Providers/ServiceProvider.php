@@ -94,19 +94,7 @@ class ServiceProvider extends BaseServiceProvider
             $loader = AliasLoader::getInstance();
 
             collect([
-
-                // Old namespace
-                \Ja\Tall\Blade::class                     => \Ja\Livewire\Blade::class,
-                \Ja\Tall\Blade\Traits\CssClassable::class => \Ja\Livewire\Blade\Traits\CssClassable::class,
-                \Ja\Tall\Blade\Traits\Mergeable::class    => \Ja\Livewire\Blade\Traits\Mergeable::class,
-                \Ja\Tall\Blade\Traits\Routable::class     => \Ja\Livewire\Blade\Traits\Routable::class,
-                \Ja\Tall\Blade\Traits\Translatable::class => \Ja\Livewire\Blade\Traits\Translatable::class,
-                \Ja\Tall\Blade\Traits\WithHooks::class    => \Ja\Livewire\Blade\Traits\WithHooks::class,
-                \Ja\Tall\Support\Helper::class            => \Ja\Livewire\Support\Helper::class,
-
-                // Helper class
-                \Tall::class                              => \Ja\Livewire\Support\Helper::class,
-                
+                \Tall::class => \Ja\Livewire\Support\Helper::class,
             ])->map(fn ($class, $namespace) => (
                 $loader->alias(
                     $namespace,

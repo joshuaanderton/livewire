@@ -14,7 +14,7 @@
 
     @if ($icon)
       <div class="flex items-center justify-center pl-3 text-gray-300">
-        <x-jal::icon :name="$icon" />
+        <x-jal::icon :type="null" :class="null" :name="$icon" />
       </div>
     @endif
 

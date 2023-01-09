@@ -21,34 +21,40 @@ trait Translatable
      * @var array $translatable
      * @return array
      */
-    protected function getTranslatable(array $translatable = null): array
+    protected function beforeRenderTranslatable(array $data): array
     {
-        if ($this->translatable ?? false) {
-            $translatable = collect($this->translatable)
-                                    ->map(fn ($name) => [$name => $this->$name])
-                                    ->collapse()
-                                    ->union($translatable ?: [])
-                                    ->all();
+        if (isset($data['translatable'])) unset($data['translatable']);
+
+        $attributes = $data['attributes'];
+
+        if (
+            ! $this->hasProp('translatable') ||
+            empty($translatable = $this->translatable)
+        ) {
+            return $data;
         }
 
-        $translated = collect($translatable)
-                        ->map(fn ($value, $name) => (
-                            Str::contains($value, '.') && Lang::has($value)
-                                ? Lang::get($value)
-                                : $value
-                        ));
-        
-        // Set class properties (if defined on class)
-        collect($translated)
-            ->filter(fn ($value, $name) => JaBlade::hasProperty($this, $name))
-            ->map(fn ($value, $name) => $this->$name = $value);
+        $translated = (
+            collect($attributes)
+                ->filter(fn ($value, $key) => in_array($key, $translatable))
+                ->map(fn ($value, $key) => $this->translate($value))
+        );
 
-        // Return translated attributes that are not properties nor in $except array
-        return $translated
-                    ->filter(fn ($value, $name) => (
-                        //!JaBlade::hasProperty($this, $name) &&
-                        !in_array($name, $this->except)
-                    ))
-                    ->all();
+        $data['attributes'] = array_merge($attributes, $translated);
+
+        return $data;
+    }
+
+    protected function translate()
+    {
+        if (
+            ! Str::contains($key, '.') || 
+            ! Lang::has($key) ||
+            is_array($translated = Lang::get($key))
+        ) {
+            return $key;
+        }
+
+        return $translated;
     }
 }

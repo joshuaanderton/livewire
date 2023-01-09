@@ -3,8 +3,8 @@
 namespace Ja\Livewire\Blade;
 
 use Ja\Livewire\Blade\Traits\Routable;
-use Ja\Livewire\Blade as Component;
 use Ja\Livewire\Blade\Traits\Translatable;
+use Ja\Livewire\Blade as Component;
 
 class Link extends Component
 {

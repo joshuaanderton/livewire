@@ -3,121 +3,119 @@
 namespace Ja\Livewire;
 
 use Closure;
-use Exception;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\Support\Htmlable;
 use Ja\Livewire\Support\Blade as TallBlade;
 use Ja\Livewire\Blade\Traits\Mergeable;
 use Ja\Livewire\Blade\Traits\CssClassable;
 use Ja\Livewire\Blade\Traits\Translatable;
+use Ja\Livewire\Blade\Traits\Routable;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
 use Ja\Livewire\Support\Helper as Tall;
 
-class Blade extends Component
+abstract class Blade extends Component
 {
     protected array $props = [];
 
-    // public function __construct(...$props)
-    // {
-    //     $this->props = $props;
-    // }
-
-    /**
-     * Automatically get the component's view path
-     *
-     * @return string
-     */
-    protected function componentViewPath(): string
+    public function render(): Closure|string //View|Htmlable|Closure|string
     {
-        // Allow overriding view path from child class
-        if ($this->componentViewPath ?? false) {
-            return $this->componentViewPath;
-        }
-
-        // TODO: Return null if $componentClass has render() method defined
-
-        $componentClass = get_called_class();
-        $baseComponentsNamespace = 'App\\View\\Components';
-
-        if (Str::contains($componentClass, self::class)) {
-            $baseComponentsNamespace = self::class;
-        }
-
-        $viewPath = $componentClass;                                               // Ja\Livewire\Blade as Components\Modals\ModalHeader (example)
-        $viewPath = Str::remove("{$baseComponentsNamespace}\\", $viewPath);        // Modals\ModalHeader
-        $viewPath = explode('\\', $viewPath);                                      // ['Modals', 'ModalHeader']
-        $viewPath = collect($viewPath)->map(fn ($slug) => Str::snake($slug, '-')); // ['modals', 'modal-header']
-        $viewPath = $viewPath->join('.');                                          // modals.modal-header
-
-        return $viewPath;
-    }
-
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
-    public function render()
-    {
-        if (($this->if ?? null) === false) {
+        if (
+            $this->hasProp('if') &&
+            $this->if === false
+        ) {
             return '';
         }
 
-        // $props = $this->props;
-        // return $this->render(...$props);
-
-        $addAttributes = $this->getMergeAttributes();
-
-        return function ($data) use ($addAttributes) {
-
-            if ($addAttributes) {
-                $data['attributes'] = $data['attributes']->merge(
-                    $addAttributes
-                );
-            }
-
-            if (
-                !isset($data['model']) &&
-                $wireModel = $data['attributes']->wire('model')->value()
-            ) {
-                $data['model'] = $wireModel;
-            }
-
-            $name = "components.{$this->componentViewPath()}";
-
-            if (Str::startsWith(get_called_class(), 'App\\View\\Components\\')) {
-                return view($name, $data)->render();
-            }
-
-            return Tall::view($name, $data)->render();
-
-        };
+        return fn ($data) => $this->output($data);
     }
 
-    /**
-     * Checks for our custom trait (e.g. Mergeable),
-     * sets neccessary class properties,
-     * returns neccessary attributes for passing to view
-     *
-     * @return array
-     */
-    private function getMergeAttributes()
+    protected function output(array $data): View|Htmlable|string
     {
-        $addAttributes = [];
+        $data = (object) $data;
+        $viewPath = $this->componentViewPath();
+        $class = $this->componentClass();
+        $wireModel = $data->attributes->wire('model')->value();
 
-        if ($this->hasTrait(Mergeable::class)) {
-            $addAttributes = array_merge($addAttributes, $this->getMergeable());
+        // Set livewire model variable
+        if (($data->model ?? true) && $wireModel) {
+            $data->model = $wireModel;
         }
 
-        if ($this->hasTrait(CssClassable::class)) {
-            $addAttributes = array_merge($addAttributes, $this->getCssClassable());
+        // Manipulate using custom traits (e.g. Translatable, Routable, etc.)
+        if ($addAttributes = $this->triggerHelperTraits()) {
+            $data->attributes = $data->attributes->merge(
+                $addAttributes
+            );
         }
 
-        if ($this->hasTrait(Translatable::class)) {
-            $addAttributes = array_merge($addAttributes, $this->getTranslatable());
+        if (method_exists($class, 'blade')) {
+            return $this->blade();
         }
 
-        return $addAttributes;
+        if (Str::startsWith($class, 'App\\View\\Components\\')) {
+            return view($viewPath, $data)->render();
+        }
+
+        return Tall::view($viewPath, $data)->render();
+
+    }
+
+    protected function componentViewPath(): string
+    {
+        if (method_exists($class = $this->componentClass(), 'render')) {
+            return null;
+        }
+
+        $viewPath = $class;
+        $propertyName = 'componentViewPath';
+
+        // Allow overriding view path from child class
+        if ($this->hasProp($propertyName)) {
+            return $this->$propertyName;
+        }
+
+        // App\View\Modal\ModalHeader -> ['modal', 'modal-header'] -> modal.modal-header
+        $viewPath = Str::remove('App\\View\\Components\\', $viewPath);
+        $viewPath = Str::remove('Ja\\Livewire\\Blade\\', $viewPath);
+        $viewPath = (
+            collect(explode('\\', $viewPath))
+                ->map(fn ($slug) => Str::snake($slug, '-'))
+                ->join('.')
+        );
+
+        return "components.{$viewPath}";
+    }
+
+    protected function componentClass(): string
+    {
+        return get_called_class();
+    }
+
+    private function triggerHelperTraits(array $attributes)
+    {
+        $helperTraits = [
+            Mergeable::class,
+            CssClassable::class,
+            Translatable::class,
+            Routable::class,
+        ];
+
+        return (
+            collect($helperTraits)
+                ->filter(fn ($trait) => $this->hasTrait($trait))
+                ->map(function ($trait) use ($attributes) {
+                    $get = "get{$trait}";
+                    return $this->$get($attributes);
+                })
+                ->collapse()
+                ->all()
+        );
+    }
+
+    private function hasProp(string $propertyName): bool
+    {
+        return $this->hasProp($propertyName);
     }
 
     /**
@@ -127,11 +125,11 @@ class Blade extends Component
      */
     protected function hasTrait(string $trait): bool
     {
-        $componentClass = get_called_class();
+        $class = $this->componentClass();
 
         return (
-            TallBlade::componentHasTrait($componentClass, $trait) ||
-            TallBlade::componentHasTrait(get_parent_class($componentClass), $trait)
+            TallBlade::componentHasTrait($class, $trait) ||
+            TallBlade::componentHasTrait(get_parent_class($class), $trait)
         );
     }
 }

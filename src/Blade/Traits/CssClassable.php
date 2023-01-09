@@ -16,48 +16,35 @@ trait CssClassable
     /**
      * Get default class names (can be overriden by parent class)
      * 
+     * @var array $attributes
      * @return array
      */
-    protected function getCssClassable(): array
+    protected function beforeRenderCssClassable(array $data): array
     {
-        $this->except = array_merge($this->except, [
-            'cssClasses'
-        ]);
+        if (isset($data['cssClassable'])) unset($data['cssClassable']);
+
+        $attributes = $data['attributes'];
 
         $cssClasses = array_merge(
-            $this->getCssClasses(),
-            $this->attributes['class'] ?? []
-        );
 
-        if (in_array('class', $this->extractPublicProperties())) {
-            $cssClasses = array_merge($cssClasses,
-                is_string($this->class)
-                    ? explode(' ', $this->class)
-                    : ($this->class ?: [])
-            );
-        }
-
-        $cssClasses = $this->mergeCssClasses($cssClasses);
-
-        return ['class' => $cssClasses];
-    }
-
-    /**
-     * Get default/preset css classes
-     * 
-     * @return array
-     */
-    protected function getCssClasses()
-    {
-        return array_merge(
-            
-            $this->cssClasses ?? [],
+            $this->hasProp('cssClasses')
+                ? $this->cssClasses
+                : [],
 
             method_exists($this, 'cssClasses')
                 ? $this->cssClasses()
-                : []
+                : [],
 
+            $attributes['class'] ?? [],
+
+            $data['class'] ?? []
         );
+
+        $cssClasses = $this->mergeCssClasses($cssClasses);
+
+        $attributes['class'] = $
+
+        return ['class' => $cssClasses];
     }
 
     /**

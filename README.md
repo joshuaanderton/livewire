@@ -48,7 +48,7 @@ Tons of reuseable & extendible components (via TailwindCSS + AlpineJS).
 <x-jal::button
   :route="['products.show', $product]"  // Route uri is retrieved (if exists) and rendered as href="" attribute
   text="products.view_product"          // Text attribute translated (if translation exists)
-  icon="cart"                           // Icon component utilized within
+  icon="fa-cart"                           // Icon component utilized within
   icon-type="solid"
   lg />
 
