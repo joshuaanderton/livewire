@@ -1,6 +1,6 @@
 <div>
     @if ($label)
-        <x-label :text="$label" />
+        <x-jal::label :text="$label" />
     @endif
 
     <div
@@ -10,10 +10,19 @@
             values: $wire.get('{{ $model }}'),
             options: @js($options),
             getOptions() {
+                
+                let values = this.values
+
+                if (!Array.isArray(values)) {
+                    values = values !== null
+                        ? [this.values]
+                        : []
+                }
+
                 return Object.entries(this.options).map(([value, label]) => ({
                     value,
                     label,
-                    selected: this.values.includes(parseInt(value)),
+                    selected: values.includes(parseInt(value)),
                 }))
             },
             init() {

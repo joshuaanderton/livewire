@@ -9,7 +9,7 @@
   <div class="{{ $label ? 'mt-2' : '' }} {{ ($attributes['disabled'] ?? false) ? 'bg-gray-200' : 'bg-white' }} flex border border-gray-200 rounded focus-within:ring-1 focus-within:ring-gray-200 focus-within:border-gray-200">
     
     @if ($icon || $prepend)
-      <span onclick="document.getElementById('{{ $id }}').select()" class="flex m-0 select-none cursor-text {{ $sm ? 'text-sm' : '' }}">
+      <span onclick="document.getElementById('{{ $id }}').select()" class="relative flex m-0 select-none cursor-text {{ $sm ? 'text-sm' : '' }}">
     @endif
 
     @if ($icon)
@@ -31,10 +31,8 @@
     <input {{ $attributes->merge([
       'id' => $id,
       'type' => $type,
-      'x-ref' => 'input',
       'name' => $name,
       'autocomplete' => $autocomplete ?: null,
-      'class' => $class, 
     ]) }} />
 
     @if ($slot->isNotEmpty())

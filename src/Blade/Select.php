@@ -15,6 +15,8 @@ class Select extends Input
         'pl-3',
         'pr-10',
         'text-base',
+        'focus:ring-0',
+        'focus:outline-none',
         // 'focus:border-black',
         // 'focus:outline-none',
         // 'focus:ring-black',

@@ -1,7 +1,9 @@
 @php
   $model = $attributes->wire('model')->value();
   $id = $model ?: $name ?: (string) Str::orderedUuid();
-  $class = $label ? "{$class} mt-2" : $class;
+  if ($label) {
+    $attributes['class'] = "{$attributes['class']} mt-2";
+  }
 @endphp
 
 <div class="{{ $wrapperClass }}">
@@ -10,7 +12,7 @@
     <x-jal::label for="{{ $id }}" :text="$label" />
   @endif
 
-  <select {{ $attributes->merge(compact('type', 'name', 'class', 'id')) }}>
+  <select {{ $attributes->merge(compact('type', 'name', 'id')) }}>
     @if ($slot->isNotEmpty())
       {!! $slot !!}
     @endif
