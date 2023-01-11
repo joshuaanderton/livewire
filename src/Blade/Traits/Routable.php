@@ -2,7 +2,7 @@
 
 namespace Ja\Livewire\Blade\Traits;
 
-use Ja\Livewire\Support\Helper as Tall;
+use Ja\Livewire\Support\Helper as JL;
 
 trait Routable
 {
@@ -43,6 +43,6 @@ trait Routable
 
     public function route(string|array $route): string|null
     {
-        return Tall::route($route);
+        return JL::route($route);
     }
 }

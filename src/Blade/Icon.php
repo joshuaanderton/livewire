@@ -5,7 +5,7 @@ namespace Ja\Livewire\Blade;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
-use Ja\Livewire\Support\Helper as Tall;
+use Ja\Livewire\Support\Helper as JL;
 use Ja\Livewire\Blade as Component;
 
 class Icon extends Component
@@ -141,7 +141,7 @@ class Icon extends Component
 
     private function importSVG(): string
     {
-        $svg = Tall::file(
+        $svg = JL::file(
             "components/icons/{$this->library}/{$this->type}/{$this->name}.svg"
         );
 

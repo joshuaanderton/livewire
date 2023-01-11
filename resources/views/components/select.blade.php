@@ -23,9 +23,9 @@
 
   @if ($disclaimer)
     @if ($disclaimer->attributes ?? false)
-    <div {{ $disclaimer->attributes->merge(['class' => 'mt-1 text-xs text-gray-500']) }}>
+    <div {{ $disclaimer->attributes->merge(['class' => 'mt-1 text-xs text-neutral-500']) }}>
     @else
-    <div class="mt-1 text-xs text-gray-500">
+    <div class="mt-1 text-xs text-neutral-500">
     @endif
       {!! $disclaimer !!}
     </div>

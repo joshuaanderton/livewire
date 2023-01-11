@@ -48,10 +48,11 @@ class Input extends Component
         'block',
         'w-full',
         'placeholder-gray-400',
-        'border-0',
+        'border-none',
         'focus:ring-0',
         'bg-transparent',
         'h-full',
+        'pr-0',
     ];
 
     public function __construct(

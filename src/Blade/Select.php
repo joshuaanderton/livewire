@@ -10,16 +10,17 @@ class Select extends Input
         'block',
         'w-full',
         'rounded-md',
-        'border-gray-300',
-        'py-2',
+        'border-transparent',
+        'bg-neutral-50',
+        'dark:bg-neutral-800',
+        'py-1',
         'pl-3',
         'pr-10',
         'text-base',
         'focus:ring-0',
         'focus:outline-none',
-        // 'focus:border-black',
-        // 'focus:outline-none',
-        // 'focus:ring-black',
-        // 'sm:text-sm'
+        'focus:ring-1',
+        'focus:ring-neutral-200',
+        'focus:border-neutral-200',
     ];
 }

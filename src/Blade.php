@@ -3,14 +3,14 @@
 namespace Ja\Livewire;
 
 use Closure;
-use Ja\Livewire\Support\Blade as TallBlade;
+use Ja\Livewire\Support\Blade as JaLivewireBlade;
 use Ja\Livewire\Blade\Traits\Mergeable;
 use Ja\Livewire\Blade\Traits\CssClassable;
 use Ja\Livewire\Blade\Traits\Translatable;
 use Ja\Livewire\Blade\Traits\Routable;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
-use Ja\Livewire\Support\Helper as Tall;
+use Ja\Livewire\Support\Helper as JaLivewire;
 
 class Blade extends Component
 {
@@ -45,7 +45,7 @@ class Blade extends Component
             return view($name, $data)->render();
         }
 
-        return Tall::view($name, $data)->render();
+        return JaLivewire::view($name, $data)->render();
     }
 
     private function triggerHelperTraits(string $event)
@@ -103,7 +103,7 @@ class Blade extends Component
     
     protected function isProjectComponent(): bool
     {
-        return Str::startsWith($this->componentClass(), 'App\\View\\Components\\');
+        return Str::startsWith($this->componentClass(), 'App\\View\\Components');
     }
 
     /**
@@ -116,8 +116,8 @@ class Blade extends Component
         $componentClass = get_called_class();
 
         return (
-            TallBlade::componentHasTrait($componentClass, $trait) ||
-            TallBlade::componentHasTrait(get_parent_class($componentClass), $trait)
+            JaLivewireBlade::componentHasTrait($componentClass, $trait) ||
+            JaLivewireBlade::componentHasTrait(get_parent_class($componentClass), $trait)
         );
     }
 }

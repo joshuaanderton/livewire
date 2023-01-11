@@ -3,6 +3,7 @@
 namespace Ja\Livewire\Blade\Traits;
 
 use Ja\Livewire\Support\Blade as JaBlade;
+use Ja\Livewire\Support\Helper as JL;
 use Illuminate\Support\Arr;
 use Exception;
 
@@ -31,7 +32,7 @@ trait Petiteable
 
         $petite = static::createBladeViewFromString(app('view'), $petite);
 
-        return view($petite, Tall::arr(
+        return view($petite, JL::arr(
             component: $this->render(),
             petite: $this->getPetite();
         ));
