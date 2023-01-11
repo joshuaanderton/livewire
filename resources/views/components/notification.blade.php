@@ -3,11 +3,13 @@
         open: true,
         persist: {{ $persist ? 'true' : 'false' }},
         init() {
-            if (this.persist) {
-                return
-            }
+            $nextTick(() => {
+                if ($data.persist) {
+                    return
+                }
 
-            setTimeout(() => open = false, 2500)
+                setTimeout(() => $data.open = false, 2500)
+            })
         }
     }"
     aria-live="assertive"
@@ -29,7 +31,7 @@
         >
 
             @if ($error)
-                <div @click="open = false" class="group bg-red-50 dark:bg-red-400/[.70] p-4 flex items-start">
+                <div x-on:click="open = false" class="group bg-red-50 dark:bg-red-400/[.70] p-4 flex items-start">
                     <div class="shrink-0">
                         <svg class="w-6 h-6 text-red-400 dark:text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
@@ -48,7 +50,7 @@
                     </div>
                 </div>
             @else
-                <div @click="open = false" class="group bg-white p-4 flex items-start">
+                <div x-on:click="open = false" class="group bg-white p-4 flex items-start">
                     <div class="flex-shrink-0">
                         @if ($success)
                             <x-jal::icon name="check-circle" class="text-green-400" />

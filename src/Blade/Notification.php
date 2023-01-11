@@ -2,6 +2,7 @@
 
 namespace Ja\Livewire\Blade;
 
+use Illuminate\Support\Facades\Lang;
 use Ja\Livewire\Blade\Traits\Translatable;
 use Ja\Livewire\Blade as Component;
 
@@ -26,7 +27,13 @@ class Notification extends Component
      *
      * @return void
      */
-    public function __construct(string $heading = null, string $text = null, bool $persist = null, bool $success = null, bool $error = null)
+    public function __construct(
+        string $heading = null,
+        string $text = null,
+        bool $persist = null,
+        bool $success = null,
+        bool $error = null
+    )
     {
         $this->heading = $heading;
         $this->text = $text;
@@ -36,11 +43,11 @@ class Notification extends Component
 
         if (! $this->heading) {
             if ($this->error) {
-                $this->heading = 'shared.error';
+                $this->heading = Lang::has('shared.error') ? Lang::get('shared.error') : __('Error');
             } elseif ($this->success) {
-                $this->heading = 'shared.success';
+                $this->heading = Lang::has('shared.success') ? Lang::get('shared.success') : __('Success!');
             } else {
-                $this->heading = 'shared.info';
+                $this->heading = Lang::has('shared.notification') ? Lang::get('shared.notification') : __('Notification');
             }
         }
     }
