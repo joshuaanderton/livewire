@@ -40,12 +40,12 @@ Tons of reuseable & extendible components (via TailwindCSS + AlpineJS).
 
 #### Icons (via [tailwindlabs/heroicons](https://github.com/tailwindlabs/heroicons))
 ```
-<x-jal::icon name="bug-ant" outline />
+<blade:icon name="bug-ant" outline />
 ```
 
 #### Buttons
 ```
-<x-jal::button
+<blade:button
   :route="['products.show', $product]"  // Route uri is retrieved (if exists) and rendered as href="" attribute
   text="products.view_product"          // Text attribute translated (if translation exists)
   icon="cart"                           // Icon component utilized within
@@ -53,5 +53,5 @@ Tons of reuseable & extendible components (via TailwindCSS + AlpineJS).
   lg />
 
 // Slot supported too of course!
-<x-jal::button href="products">View Products</x-jal::button>
+<blade:button href="products">View Products</blade:button>
 ```
