@@ -7,6 +7,7 @@ composer require joshuaanderton/livewire
 Import component JS and CSS dependencies:
 ```
 // ./vite.config.ts
+
 import { defineConfig } from 'vite'
 import laravel from 'laravel-vite-plugin'
 import jaLivewire from './vendor/joshuaanderton/livewire'
@@ -27,12 +28,11 @@ Include package views in tailwind config:
 // ./tailwind.config.js
 
 module.exports = {
-  darkMode: 'class',
-	content: [
-		'./resources/views/**/*.blade.php',
-    './vendor/joshuaanderton/livewire/**/*.blade.php',
-	],
-  ...
+    content: [
+      './resources/views/**/*.blade.php',
+      './vendor/joshuaanderton/livewire/**/*.blade.php',
+    ],
+    ...
 ```
 
 ### Blade Components
@@ -40,7 +40,7 @@ Tons of reuseable & extendible components (via TailwindCSS + AlpineJS).
 
 #### Icons (via [tailwindlabs/heroicons](https://github.com/tailwindlabs/heroicons))
 ```
-<blade:icon name="bug-ant" outline />
+<blade:icon name="bug-ant" />
 ```
 
 #### Buttons
