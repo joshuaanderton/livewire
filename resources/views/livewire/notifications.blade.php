@@ -1,15 +1,15 @@
-<div>
+<div aria-live="assertive" class="{{ $messages->count() === 0 ? 'hidden' : 'flex' }} flex-col pointer-events-none fixed inset-0 items-end p-4 sm:items-start sm:p-6 z-[100]">
     
-    @if ($successMessage)
-        <x-jal::notification :text="$successMessage" success />
-    @endif
+    @foreach ($messages as $message)
+        
+        <x-jal::notification
+            id="{{ $message['id'] }}"
+            wire:key="{{ $message['id'] }}"
+            :text="$message['text']"
+            :success="$message['success'] ?? false"
+            :error="$message['error'] ?? false"
+            :persist="$message['persist'] ?? false" />
 
-    @if ($errorMessage)
-        <x-jal::notification :text="$errorMessage" error />
-    @endif
-
-    @if ($infoMessage)
-        <x-jal::notification :text="$infoMessage" persist />
-    @endif
+    @endforeach
 
 </div>

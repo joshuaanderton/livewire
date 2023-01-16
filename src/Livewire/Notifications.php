@@ -2,15 +2,13 @@
 
 namespace Ja\Livewire\Livewire;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class Notifications extends Component
 {
-    public ?string $successMessage = null;
-
-    public ?string $errorMessage = null;
-
-    public ?string $infoMessage = null;
+    public Collection $messages;
 
     public $listeners = [
         'success-message' => 'showSuccessMessage',
@@ -20,32 +18,46 @@ class Notifications extends Component
 
     public function mount()
     {
+        $this->messages = new Collection;
+
         if ($message = session()->get('success-message')) {
-            $this->successMessage = $message;
+            $this->showSuccessMessage($message);
         }
 
         if ($message = session()->get('error-message')) {
-            $this->errorMessage = $message;
+            $this->showErrorMessage($message);
         }
 
         if ($message = session()->get('info-message')) {
-            $this->infoMessage = $message;
+            $this->showInfoMessage($message);
         }
     }
 
     public function showSuccessMessage(string $message): void
     {
-        $this->successMessage = $message;
+        $this->messages->push([
+            'id' => (string) Str::orderedUuid(),
+            'text' => $message,
+            'success' => true,
+        ]);
     }
 
     public function showErrorMessage(string $message): void
     {
-        $this->errorMessage = $message;
+        $this->messages->push([
+            'id' => (string) Str::orderedUuid(),
+            'text' => $message,
+            'error' => true,
+        ]);
     }
 
     public function showInfoMessage(string $message): void
     {
-        $this->infoMessage = $message;
+        $this->messages->push([
+            'id' => (string) Str::orderedUuid(),
+            'text' => $message,
+            'persist' => true,
+        ]);
     }
 
     public function render()
