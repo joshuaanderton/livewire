@@ -1,4 +1,4 @@
-## Tools for making great SaaS apps with Livewire + Laravel
+## Tools for making great SaaS apps with Laravel and Livewire
 
 ```
 composer require joshuaanderton/livewire
