@@ -7,61 +7,65 @@
         wire:ignore
         class="{{ $label ? 'mt-1' : '' }} w-full"
         x-data="{
-            values: $wire.get('{{ $model }}'),
-            options: @js($options),
-            getOptions() {
-                
-                let values = this.values
-
-                if (!Array.isArray(values)) {
-                    values = values !== null
-                        ? [this.values]
-                        : []
-                }
-
-                return Object.entries(this.options).map(([value, label]) => ({
-                    value,
-                    label,
-                    selected: values.includes(parseInt(value)),
-                }))
-            },
+            multiple: true,
+            value: $wire.get('{{ $model }}'),
+            options: [
+                @foreach($options as $val => $option)
+                { value: {{ $val }}, label: '{{ $option }}' },
+                @endforeach
+            ],
             init() {
                 this.$nextTick(() => {
 
-                    const addItems = this.$refs.element.tagName === 'INPUT',
-                          instance = new Choices(this.$refs.element, {
-                              addItems,
-                              removeItems: true,
-                              removeItemButton: true,
-                          })
+                    const addItems = $refs.select.tagName === 'INPUT'
 
-                    if (addItems) {
-                        instance.setValue(
-                            this.options.length === 0
-                                ? object.values(this.value)
-                                : this.getOptions().filter(opt => opt.selected).map(opt => opt.label)
-                        )
-                        return
+                    let options = {
+                        removeItems: true,
+                        removeItemButton: true,
                     }
 
-                    instance.setChoices(
-                        this.getOptions()
-                    )
+                    if (addItems) {
+                        options.addItems = true
+                    }
+
+                    let choices = new Choices(this.$refs.select, options)
+    
+                    let refreshChoices = () => {
+                        let selection = this.multiple ? this.value : [this.value]
+    
+                        choices.clearStore()
+                        choices.setChoices(this.options.map(({ value, label }) => ({
+                            value,
+                            label,
+                            selected: selection.includes(value),
+                        })))
+                    }
+    
+                    this.$refs.select.addEventListener('change', () => {
+                        this.value = choices.getValue(true)
+                        $wire.set('{{ $model }}', this.value)
+                    })
+    
+                    if (addItems) return
+
+                    refreshChoices()
+    
+                    this.$watch('value', () => refreshChoices())
+                    this.$watch('options', () => refreshChoices())
                 })
             }
         }"
+        class="max-w-sm w-full"
     >
         @if ($addItems)
-            <input {{ $attributes->merge([
-                'x-ref' => 'element',
-                'type' => 'hidden',
-            ]) }} />
+            <input {{ $attributes->merge(['x-ref' => 'select', 'type' => 'hidden']) }} />
         @else
             <select {{ $attributes->merge([
-                'x-ref' => 'element',
+                'x-ref' => 'select',
                 'type' => null,
                 'multiple' => true,
                 'multiselect' => true,
+                'disabled' => null,
             ]) }}></select>
         @endif
     </div>
@@ -71,5 +75,4 @@
             {{ $message }}
         </div>
     @enderror
-
 </div>
