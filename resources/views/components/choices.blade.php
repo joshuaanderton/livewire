@@ -1,6 +1,6 @@
 <div>
     @if ($label)
-        <x-jal::label :text="$label" />
+        <x-jal::label :text="$label" :required="$required" />
     @endif
 
     <div
@@ -10,8 +10,8 @@
             multiple: true,
             value: $wire.get('{{ $model }}'),
             options: [
-                @foreach($options as $val => $option)
-                { value: {{ $val }}, label: '{{ $option }}' },
+                @foreach($options as $option)
+                { value: {{ $option['value'] }}, label: '{{ $option['label'] }}' },
                 @endforeach
             ],
             init() {
@@ -32,6 +32,10 @@
     
                     let refreshChoices = () => {
                         let selection = this.multiple ? this.value : [this.value]
+
+                        if (!selection) {
+                            return
+                        }
     
                         choices.clearStore()
                         choices.setChoices(this.options.map(({ value, label }) => ({
@@ -71,8 +75,6 @@
     </div>
 
     @error($model)
-        <div class="text-xs text-red-500 mt-1">
-            {{ $message }}
-        </div>
+        <x-input.error :model="$model" />
     @enderror
 </div>
