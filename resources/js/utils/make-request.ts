@@ -1,5 +1,5 @@
-import axios from '@pckg/axios'
-import { debounce } from '@pckg/lodash'
+import axios from 'axios'
+import { debounce } from 'lodash'
 import { cache, cacheKey } from './cache'
 
 const debounceFetchWait: number = 500,
@@ -31,8 +31,6 @@ export const makeRequest = (url, options) => {
     }
 
     request.then(response => {
-
-        console.log(response.request)
 
         if (!response.request.fromCache) {
             return
@@ -92,7 +90,6 @@ const debounceFetch = debounce(() => {
             cache.store.setItem(response.key, response)
 
             getQueueItem(response.key).resolve(response)
-            console.log(response)
         }))
         .catch(error => queueReject(error))
         .then(() => queue = [])

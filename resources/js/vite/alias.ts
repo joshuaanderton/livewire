@@ -17,7 +17,7 @@ export default (config: {preserveSymlinks?: boolean} = {}, packagePath: string) 
 
   config = _merge(config, 'resolve.alias', {
     '@ja-livewire': path.resolve(`${packagePath}/resources/js`),
-    '@pckg': path.resolve('./node_modules'),
+    '~': path.resolve('./node_modules'),
     '@': path.resolve('./resources/js'),
   })
 

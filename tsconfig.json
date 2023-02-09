@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "skipLibCheck": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "allowJs": true,
+    "paths": {
+      "@ja-livewire/*": ["./resources/js/*"],
+      "@/*": ["../../../resources/js/*"],
+      "~/*": ["../../../node_modules/*"],
+    },
+  },
+  "include": [
+    "resouces/js/**/*.{ts,js}",
+    "../../../resources/js/**/*.{ts,js}"
+  ]
+}

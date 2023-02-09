@@ -1,11 +1,7 @@
-import { UserConfig } from 'vite'
-import {
-  aliasConfig,
-  devServerConfig,
-  _envIs,
-  _set,
-  _merge
-} from './resources/js/vite'
+import { UserConfig, searchForWorkspaceRoot } from 'vite'
+import { _merge } from './resources/js/vite'
+import path from 'path'
+import process from 'node:process'
 
 export default () => ({
 
@@ -18,7 +14,24 @@ export default () => ({
     }
   
     // Add default aliases (e.g. alias @ -> ./resources/js)
-    config = aliasConfig(config, __dirname)
+    const packagePath = __dirname
+
+    // Support symlinks for aliasing vendor packages
+    if (config.preserveSymlinks !== false) {
+      config.preserveSymlinks = true
+    }
+
+    // Allow aliasing this package
+    config = _merge(config, 'server.fs.allow', [
+      path.resolve(packagePath),
+      searchForWorkspaceRoot(process.cwd())
+    ])
+
+    config = _merge(config, 'resolve.alias', {
+      '@ja-livewire': path.resolve(`${packagePath}/resources/js`),
+      '~': path.resolve('./node_modules'),
+      '@': path.resolve('./resources/js'),
+    })
 
     if (mode !== 'development') {
       return config
