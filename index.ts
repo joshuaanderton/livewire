@@ -1,44 +1,39 @@
 import { UserConfig, searchForWorkspaceRoot } from 'vite'
-import { process, path } from 'node'
-import { _merge } from './resources/js/vite'
+import path from 'path'
+import { _merge, _set } from './resources/js/vite'
 
-export default () => ({
-
-  name: 'ja-livewire',
+export default (config: JaLivewireConfig = {}) => {
   
-  config: (config: UserConfig, { mode, command }: { mode: string, command: string }) => {
+  const jaLivewireConfig = config
 
-    if (!['build', 'serve'].includes(command)) {
-      return config
-    }
-  
-    // Add default aliases (e.g. alias @ -> ./resources/js)
-    const packagePath = __dirname
+  return {
 
-    // Support symlinks for aliasing vendor packages
-    if (config.preserveSymlinks !== false) {
-      config.preserveSymlinks = true
-    }
-
-    // Allow aliasing this package
-    config = _merge(config, 'server.fs.allow', [
-      path.resolve(packagePath),
-      searchForWorkspaceRoot(process.cwd())
-    ])
-
-    config = _merge(config, 'resolve.alias', {
-      '@ja-livewire': path.resolve(`${packagePath}/resources/js`),
-      '~': path.resolve('./node_modules'),
-      '@': path.resolve('./resources/js'),
-    })
-
-    if (mode !== 'development') {
-      return config
-    }
-  
-    // Configure dev server (e.g. valet https, HMR, etc.)
-    // config = devServerConfig(config, mode)
+    name: 'ja-livewire',
     
-    return config
+    config: (config: UserConfig) => {
+    
+      const packagePath = __dirname
+
+      config = _merge(config, 'server.fs.allow', [
+        path.resolve(packagePath),
+        searchForWorkspaceRoot(process.cwd())
+      ])
+
+      config = _merge(config, 'resolve.alias', {
+        '@ja-livewire': path.resolve(`${packagePath}/resources/js`),
+        '~': path.resolve('./node_modules'),
+        '@': path.resolve('./resources/js'),
+      })
+
+      config = _set(config, 'resolve.preserveSymlinks', true)
+
+      config.define = {
+        ...(config.define || {}),
+        __JA_LIVEWIRE_CONFIG__: jaLivewireConfig
+      }
+      
+      return config
+      
+    }
   }
-})
+}

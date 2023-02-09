@@ -6,7 +6,10 @@
     <div
         wire:ignore
         class="{{ $label ? 'mt-1' : '' }} w-full"
-        x-data="jalChoices"
+        x-data="jalChoices({
+            model: @js($model),
+            options: @js($options)
+        })"
         class="max-w-sm w-full"
     >
         @if ($addItems)

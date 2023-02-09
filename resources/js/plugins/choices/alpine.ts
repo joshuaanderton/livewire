@@ -1,4 +1,6 @@
-import Choices from '~/choices.js'
+import Choices from 'choices.js'
+import 'choices.js/public/assets/styles/choices.min.css'
+import './styles.css'
 
 interface ChoicesConfig {
   removeItems: boolean
@@ -14,20 +16,34 @@ interface Props {
 
 interface Option {
   label: string
-  value: string
+  value: string|number
 }
 
-export default ({
+interface Data {
+  model: string
+  multiple: boolean
+  options: Option[]
+  value: string|number|string[]|number[]|null
+  init: () => void
+}
+
+export const data = ({
   model,
   options = [],
   multiple = true
-}: Props) => ({
+}: Props): Data => ({
 
   model,
 
-  options,
-
   multiple,
+
+  get options(): Option[] {
+    return (
+      Object
+        .values(options)
+        .map(({ label, value }: any): Option => ({ label, value }))
+    )
+  },
 
   get value() {
     return this.$wire.get(model)
@@ -38,9 +54,11 @@ export default ({
   },
 
   init() {
+
     this.$nextTick(() => {
 
-      const addItems = this.$refs.select.tagName === 'INPUT'
+      const input = this.$refs.select,
+            addItems = input.tagName === 'INPUT'
 
       let config: ChoicesConfig = {
         removeItems: true,
@@ -51,7 +69,7 @@ export default ({
         config.addItems = true
       }
 
-      let choices = new Choices(this.refs.select, config)
+      let choices = new Choices(input, config)
 
       let refreshChoices = () => {
         const value = this.value
@@ -70,7 +88,7 @@ export default ({
         })))
       }
 
-      this.$refs.select.addEventListener('change', () => {
+      input.addEventListener('change', () => {
         this.value = choices.getValue(true)
       })
 
