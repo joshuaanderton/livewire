@@ -1,5 +1,11 @@
 import Choices from '~/choices.js'
 
+interface ChoicesConfig {
+  removeItems: boolean
+  removeItemButton: boolean
+  addItems?: boolean
+}
+
 interface Props {
   model: string
   options?: Option[]
@@ -11,67 +17,69 @@ interface Option {
   value: string
 }
 
-export default ({ model, options = [], multiple = true }: Props) => {
-  return {
+export default ({
+  model,
+  options = [],
+  multiple = true
+}: Props) => ({
 
-    model,
+  model,
 
-    options,
+  options,
 
-    multiple,
+  multiple,
 
-    get value() {
-      return this.$wire.get(model)
-    },
+  get value() {
+    return this.$wire.get(model)
+  },
 
-    set value(newValue) {
-      this.$wire.set(model, newValue)
-    },
+  set value(newValue) {
+    this.$wire.set(model, newValue)
+  },
 
-    init() {
-      this.$nextTick(() => {
+  init() {
+    this.$nextTick(() => {
 
-        const addItems = this.$refs.select.tagName === 'INPUT'
+      const addItems = this.$refs.select.tagName === 'INPUT'
 
-        let options = {
-          removeItems: true,
-          removeItemButton: true,
+      let config: ChoicesConfig = {
+        removeItems: true,
+        removeItemButton: true,
+      }
+
+      if (addItems) {
+        config.addItems = true
+      }
+
+      let choices = new Choices(this.refs.select, config)
+
+      let refreshChoices = () => {
+        const value = this.value
+
+        let selection = this.multiple ? value : [value]
+
+        if (!selection) {
+          return
         }
 
-        if (addItems) {
-          options.addItems = true
-        }
+        choices.clearStore()
+        choices.setChoices(this.options.map(({ value, label }) => ({
+          value,
+          label,
+          selected: selection.includes(value),
+        })))
+      }
 
-        let choices = new Choices(this.refs.select, options)
-
-        let refreshChoices = () => {
-          const value = this.value
-
-          let selection = this.multiple ? value : [value]
-
-          if (!selection) {
-            return
-          }
-
-          choices.clearStore()
-          choices.setChoices(this.options.map(({ value, label }) => ({
-            value,
-            label,
-            selected: selection.includes(value),
-          })))
-        }
-
-        this.$refs.select.addEventListener('change', () => {
-          this.value = choices.getValue(true)
-        })
-
-        if (addItems) return
-
-        refreshChoices()
-
-        this.$watch('value', () => refreshChoices())
-        this.$watch('options', () => refreshChoices())
+      this.$refs.select.addEventListener('change', () => {
+        this.value = choices.getValue(true)
       })
-    }
+
+      if (addItems) return
+
+      refreshChoices()
+
+      this.$watch('value', () => refreshChoices())
+      this.$watch('options', () => refreshChoices())
+    })
   }
-}
+})

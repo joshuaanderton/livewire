@@ -1,7 +1,6 @@
 import { UserConfig, searchForWorkspaceRoot } from 'vite'
+import { process, path } from 'node'
 import { _merge } from './resources/js/vite'
-import path from 'path'
-import process from 'node:process'
 
 export default () => ({
 
