@@ -1,7 +1,10 @@
+export interface JaLivewireConfigPlugin {
+  name?: string
+}
+
 export interface JaLivewireConfig {
   plugins?: {
-    choices?: {
-      name?: string
-    }
+    choices?: JaLivewireConfigPlugin
+    flatpickr?: JaLivewireConfigPlugin
   }
 }

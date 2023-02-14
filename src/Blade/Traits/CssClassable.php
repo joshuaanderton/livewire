@@ -1,4 +1,4 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade\Traits;
 
@@ -8,17 +8,17 @@ trait CssClassable
 {
     /**
      * Define attributes that should be css classable
-     * 
-     * @return array $cssClassable
+     *
+     * @return array<int|string, string|bool>[] $cssClassable
      */
     // protected array $cssClassable = [];
 
     /**
      * Get default class names (can be overriden by parent class)
-     * 
+     *
      * @return array
      */
-    protected function beforeRenderCssClassable(): array
+    final protected function beforeRenderCssClassable(): array
     {
         $this->except = array_merge($this->except, [
             'cssClasses'
@@ -29,11 +29,14 @@ trait CssClassable
             $this->attributes['class'] ?? []
         );
 
+        $class = $this->class ?? null;
+
         if (in_array('class', $this->extractPublicProperties())) {
-            $cssClasses = array_merge($cssClasses,
-                is_string($this->class)
-                    ? explode(' ', $this->class)
-                    : ($this->class ?: [])
+            $cssClasses = array_merge(
+                $cssClasses,
+                is_string($class)
+                    ? explode(' ', $class)
+                    : ($class ?: [])
             );
         }
 
@@ -44,32 +47,29 @@ trait CssClassable
 
     /**
      * Get default/preset css classes
-     * 
-     * @return array
+     *
+     * @return array<int|string, string|bool>
      */
-    protected function getCssClasses()
+    final protected function getCssClasses()
     {
         return array_merge(
-            
             $this->cssClasses ?? [],
-
             method_exists($this, 'cssClasses')
                 ? $this->cssClasses()
                 : []
-
         );
     }
 
     /**
      * Merge multiple arrays or strings of classnames into one string
      *
-     * @var string|array|null $cssClasses
-     * @var array<string|array|null> $mergeCssClasses
+     * @param string|array<int|string, string|bool>|null $cssClasses
+     * @param (string|array<int|string, string|bool>|null)[] $mergeCssClasses
      * @return string
      */
-    private function mergeCssClasses(string|array|null $cssClasses, ...$mergeCssClasses): string
+    final private function mergeCssClasses(string|array|null $cssClasses, string|array|null ...$mergeCssClasses): string
     {
-        if (!is_array($cssClasses)) {
+        if (! is_array($cssClasses)) {
             $cssClasses = explode(' ', (string) $cssClasses);
         }
 
@@ -88,10 +88,10 @@ trait CssClassable
     /**
      * Flatten/trim/clean array of classnames into string
      *
-     * @var string|array $cssClasses
+     * @param string|array<int|string, string|bool> $cssClasses
      * @return string
      */
-    private function cleanCssClasses(string|array $cssClasses)
+    final private function cleanCssClasses(string|array $cssClasses)
     {
         if (is_string($cssClasses)) {
             $cssClasses = explode(' ', $cssClasses);
@@ -102,8 +102,7 @@ trait CssClassable
         }
 
         $cssClasses
-            ->map(fn ($className) => trim($className))
-            ->filter(fn ($className) => !empty($className))
+            ->map(fn ($value) => is_string($value) ? trim($value) : null)
             ->whereNotNull();
 
         return Arr::toCssClasses(

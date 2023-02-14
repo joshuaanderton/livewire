@@ -1,15 +1,15 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade;
 
-use Ja\Livewire\Blade\Traits\Routable;
 use Ja\Livewire\Blade as Component;
+use Ja\Livewire\Blade\Traits\Routable;
 use Ja\Livewire\Blade\Traits\Translatable;
 
 class Link extends Component
 {
-    use Routable,
-        Translatable;
+    use Routable;
+    use Translatable;
 
     protected array $translatable = ['text'];
 

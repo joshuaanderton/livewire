@@ -7,6 +7,6 @@ use Ja\Livewire\Contracts\Traits\WithLivewireRulePrefix;
 
 abstract class Contract
 {
-    use WithActionValidate,
-        WithLivewireRulePrefix;
+    use WithActionValidate;
+    use WithLivewireRulePrefix;
 }

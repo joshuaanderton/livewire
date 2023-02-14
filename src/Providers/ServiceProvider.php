@@ -2,15 +2,15 @@
 
 namespace Ja\Livewire\Providers;
 
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\Blade;
+
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Illuminate\Support\Str;
 use Ja\Livewire\Blade as JaBlade;
 use Ja\Livewire\Livewire as JaLivewire;
-
-use Livewire\Livewire;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Ja\Livewire\Support\TagCompiler;
+use Livewire\Livewire;
 
 class ServiceProvider extends BaseServiceProvider
 {

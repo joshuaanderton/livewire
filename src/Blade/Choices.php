@@ -1,15 +1,15 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade;
 
+use Ja\Livewire\Blade as Component;
 use Ja\Livewire\Blade\Traits\Mergeable;
 use Ja\Livewire\Blade\Traits\Translatable;
-use Ja\Livewire\Blade as Component;
 
 class Choices extends Component
 {
-    use Translatable,
-        Mergeable;
+    use Translatable;
+    use Mergeable;
 
     public array $options;
 
@@ -34,12 +34,11 @@ class Choices extends Component
         bool $required = null,
         bool $addItems = null,
         array $props = null
-    )
-    {
+    ) {
         $this->options = $options ?: [];
         $this->label = $label;
-        $this->required = !! $required;
-        $this->addItems = !! $addItems;
+        $this->required = ! ! $required;
+        $this->addItems = ! ! $addItems;
         $this->props = $props ?: [];
 
         $options = $options ?: $this->props['options'] ?? [];
@@ -55,9 +54,9 @@ class Choices extends Component
                     $value = ! is_numeric($value)
                         ? htmlspecialchars($value) :
                         (int) $value;
-                        
+
                     $label = htmlspecialchars((string) $label);
-                    
+
                     return compact('value', 'label');
                 })
                 ->all()

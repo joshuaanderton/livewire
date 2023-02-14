@@ -17,10 +17,10 @@ trait WithLivewireRulePrefix
     protected static function modelPrefix(): string
     {
         $contractClass = get_called_class();                  // e.g. App\Contracts\TaskContract
-        $modelName     = class_basename($contractClass);      // TaskTemplateContract
-        $modelName     = Str::remove('Contract', $modelName); // TaskTemplate
-        $modelName     = Str::lcfirst($modelName);            // taskTemplate
-        $prefix        = "{$modelName}.";                     // taskTemplate. (e.g. taskTemplate.title)
+        $modelName = class_basename($contractClass);      // TaskTemplateContract
+        $modelName = Str::remove('Contract', $modelName); // TaskTemplate
+        $modelName = Str::lcfirst($modelName);            // taskTemplate
+        $prefix = "{$modelName}.";                     // taskTemplate. (e.g. taskTemplate.title)
 
         return $prefix;
     }

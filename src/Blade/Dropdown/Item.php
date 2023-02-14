@@ -1,14 +1,15 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade\Dropdown;
 
+use Ja\Livewire\Blade as Component;
 use Ja\Livewire\Blade\Traits\Routable;
 use Ja\Livewire\Blade\Traits\Translatable;
-use Ja\Livewire\Blade as Component;
 
 class Item extends Component
 {
-    use Routable, Translatable;
+    use Routable;
+    use Translatable;
 
     protected array $translatable = ['text'];
 
@@ -35,7 +36,7 @@ class Item extends Component
         if (! $href && $route) {
             $href = $this->route($route);
         }
-        
+
         $this->href = $href;
         $this->tag = $this->href ? 'a' : 'button';
         $this->type = $type ?: ($this->tag === 'button' ? 'button' : null);

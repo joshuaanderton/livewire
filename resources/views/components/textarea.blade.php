@@ -1,10 +1,9 @@
 <jal::input-group>
 
-    <input {{ $attributes->merge([
+    <textarea {{ $attributes->merge([
       'id' => $id,
-      'type' => $type,
       'name' => $name,
       'autocomplete' => $autocomplete,
-    ]) }} />
+    ]) }}>{{ $value }}{{ $slot }}</textarea>
 
 </jal::input-group>

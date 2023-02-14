@@ -2,14 +2,13 @@
 
 namespace Ja\Livewire;
 
-use Closure;
-use Ja\Livewire\Support\Blade as JaLivewireBlade;
-use Ja\Livewire\Blade\Traits\Mergeable;
-use Ja\Livewire\Blade\Traits\CssClassable;
-use Ja\Livewire\Blade\Traits\Translatable;
-use Ja\Livewire\Blade\Traits\Routable;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
+use Ja\Livewire\Blade\Traits\CssClassable;
+use Ja\Livewire\Blade\Traits\Mergeable;
+use Ja\Livewire\Blade\Traits\Routable;
+use Ja\Livewire\Blade\Traits\Translatable;
+use Ja\Livewire\Support\Blade as JaLivewireBlade;
 use Ja\Livewire\Support\Helper as JaLivewire;
 
 class Blade extends Component
@@ -38,7 +37,7 @@ class Blade extends Component
         if ($wireModel = $data['attributes']->wire('model')->value()) {
             $data['model'] = $data['model'] ?? $wireModel;
         }
-        
+
         $name = $this->componentViewPath();
 
         if ($this->isProjectComponent()) {
@@ -63,6 +62,7 @@ class Blade extends Component
                 ->map(function ($trait) use ($event) {
                     $trait = class_basename($trait);
                     $method = "{$event}{$trait}";
+
                     return $this->$method();
                 })
                 ->collapse()
@@ -81,7 +81,7 @@ class Blade extends Component
 
         $viewPath = $class;
         $viewPath = Str::remove('App\\View\\Components\\', $viewPath);
-        $viewPath = Str::remove(self::class . '\\', $viewPath);
+        $viewPath = Str::remove(self::class.'\\', $viewPath);
         $viewPath = (
             collect(explode('\\', $viewPath))
                 ->map(fn ($slug) => Str::snake($slug, '-'))
@@ -100,7 +100,7 @@ class Blade extends Component
     {
         return property_exists($this->componentClass(), $name);
     }
-    
+
     protected function isProjectComponent(): bool
     {
         return Str::startsWith($this->componentClass(), 'App\\View\\Components');
@@ -109,7 +109,7 @@ class Blade extends Component
     /**
      * Wrapper for componentHasTrait
      *
-     * @return boolean
+     * @return bool
      */
     protected function hasTrait(string $trait): bool
     {

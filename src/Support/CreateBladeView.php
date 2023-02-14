@@ -8,7 +8,7 @@ class CreateBladeView extends Component
 {
     public static function fromString(string $content): string
     {
-        return (new static)->createBladeViewFromString(
+        return (new static())->createBladeViewFromString(
             app('view'),
             $content
         );

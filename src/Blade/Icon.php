@@ -1,12 +1,12 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade;
 
 use Exception;
-use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
-use Ja\Livewire\Support\Helper as JL;
+use Illuminate\Support\Str;
 use Ja\Livewire\Blade as Component;
+use Ja\Livewire\Support\Helper as JL;
 
 class Icon extends Component
 {
@@ -17,7 +17,7 @@ class Icon extends Component
     public string $type;
 
     public string $class;
-    
+
     public bool $if;
 
     public ?string $svg = null;
@@ -73,29 +73,23 @@ class Icon extends Component
         }
 
         $this->name = explode(' ', $name)[0];
-        $this->class = "icon-{$this->name} " . ($class ?: '');
-        $this->xs = !! $xs;
-        $this->sm = !! $sm;
-        $this->md = !! $md;
-        $this->lg = !! $lg;
+        $this->class = "icon-{$this->name} ".($class ?: '');
+        $this->xs = ! ! $xs;
+        $this->sm = ! ! $sm;
+        $this->md = ! ! $md;
+        $this->lg = ! ! $lg;
 
         if ($library) {
-            
             $this->library = $library;
             $this->type = $type ?: $this->typeDefaults[$this->library];
-
         } elseif ($this->hasFontAwesomeKeys()) {
-
             $this->library = 'fontawesome';
             $this->type = $type ?: $this->typeDefaults[$this->library];
 
             $this->translateFontAwesomeKeys();
-
         } else {
-
             $this->library = 'heroicons';
             $this->type = $type ?: $this->typeDefaults[$this->library];
-
         }
 
         // $this->validate();
@@ -103,6 +97,7 @@ class Icon extends Component
         switch ($this->library) {
             case 'fontawesome':
                 $this->class = "fa-{$this->type} fa-{$this->name} {$this->class}";
+
                 break;
             case 'heroicons':
                 $this->svg = $this->importSVG($this->name);
@@ -128,13 +123,13 @@ class Icon extends Component
 
         if (! $libraryTypes) {
             throw new Exception(
-                "[{$this->library} is not a supported icon library (options are " . join(', ', array_keys($this->types)) . ")"
+                "[{$this->library} is not a supported icon library (options are ".join(', ', array_keys($this->types)).")"
             );
         }
-        
-        if (!in_array($this->type, $libraryTypes)) {
+
+        if (! in_array($this->type, $libraryTypes)) {
             throw new Exception(
-                "[{$this->type}] is not a supported {$this->library} icon type (options are " . join(', ', $libraryTypes) . ")"
+                "[{$this->type}] is not a supported {$this->library} icon type (options are ".join(', ', $libraryTypes).")"
             );
         }
     }
@@ -179,6 +174,7 @@ class Icon extends Component
 
         if ($type) {
             $this->type = $type;
+
             return;
         }
 
@@ -196,7 +192,9 @@ class Icon extends Component
 
     public function render()
     {
-        if (! $this->if) return '';
+        if (! $this->if) {
+            return '';
+        }
 
         return match ($this->library) {
             'fontawesome' => <<<'blade'

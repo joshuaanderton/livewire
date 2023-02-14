@@ -1,21 +1,21 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Lang;
-use Ja\Livewire\Blade\Traits\Mergeable;
+use Illuminate\Support\Str;
+use Ja\Livewire\Blade as Component;
 use Ja\Livewire\Blade\Traits\CssClassable;
+use Ja\Livewire\Blade\Traits\Mergeable;
 use Ja\Livewire\Blade\Traits\Routable;
 use Ja\Livewire\Blade\Traits\Translatable;
-use Ja\Livewire\Blade as Component;
 
 class Button extends Component
 {
-    use CssClassable,
-        Routable,
-        Mergeable,
-        Translatable;
+    use CssClassable;
+    use Routable;
+    use Mergeable;
+    use Translatable;
 
     protected array $mergeable = ['props'];
 
@@ -27,7 +27,11 @@ class Button extends Component
 
     public ?string $type = null;
 
-    public ?string $text, $icon, $href;
+    public ?string $text;
+
+    public ?string $icon;
+
+    public ?string $href;
 
     public bool $if;
 
@@ -212,8 +216,7 @@ class Button extends Component
         bool $secondary = null,
         bool $outline = null,
         bool $border = null,
-    )
-    {
+    ) {
         $this->type = $type;
         $this->text = $text;
         $this->icon = $icon;
@@ -221,16 +224,16 @@ class Button extends Component
         $this->href = $href;
         $this->if = $if === null ? true : $if;
         $this->props = $props ?: [];
-        $this->xs = !! $xs;
-        $this->sm = !! $sm;
-        $this->md = !! $md;
-        $this->lg = !! $lg;
-        $this->neutral = !! $neutral;
-        $this->danger = !! $danger;
-        $this->secondary = !! $secondary;
-        $this->outline = !! $outline;
+        $this->xs = ! ! $xs;
+        $this->sm = ! ! $sm;
+        $this->md = ! ! $md;
+        $this->lg = ! ! $lg;
+        $this->neutral = ! ! $neutral;
+        $this->danger = ! ! $danger;
+        $this->secondary = ! ! $secondary;
+        $this->outline = ! ! $outline;
         $this->border = $border === null ? true : $border;
-        $this->confirm = !! $confirm;
+        $this->confirm = ! ! $confirm;
         $this->confirmText = $confirmText ?: (Lang::has('components.are_you_sure') ? __('components.are_you_sure') : __('jal::components.are_you_sure'));
 
         if (! $this->href && $route) :
@@ -280,8 +283,8 @@ class Button extends Component
             $this->variantCssClasses[$theme][$variant]
         );
 
-        if (!$this->border) {
-            $this->cssClasses = collect($this->cssClasses)->filter(fn ($class) => !Str::contains($class, 'border-'))->all();
+        if (! $this->border) {
+            $this->cssClasses = collect($this->cssClasses)->filter(fn ($class) => ! Str::contains($class, 'border-'))->all();
             $this->cssClasses[] = 'border border-transparent';
         }
     }

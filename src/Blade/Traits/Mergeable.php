@@ -1,4 +1,4 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade\Traits;
 
@@ -8,15 +8,15 @@ trait Mergeable
 {
     /**
      * Define attributes that should be merged
-     * 
+     *
      * @return array $mergeable
      */
     // protected array $mergeable = [];
 
     /**
      * Merge attributes from $mergeable class property and set to class or return for $attributes
-     * 
-     * @var array $mergeable
+     *
+     * @var array
      * @return array
      */
     protected function beforeRenderMergeable(array $mergeable = null): array
@@ -24,7 +24,7 @@ trait Mergeable
         $this->except = array_merge($this->except, [
             'mergeable'
         ]);
-        
+
         $mergeable = collect(array_merge(
             $this->props ?: [],
             $mergeable ?: []
@@ -38,8 +38,8 @@ trait Mergeable
         // Return attributes that are not properties nor in $except array
         return $mergeable
                     ->filter(fn ($value, $name) => (
-                        !JaBlade::hasProperty($this, $name) &&
-                        !in_array($name, $this->except)
+                        ! JaBlade::hasProperty($this, $name) &&
+                        ! in_array($name, $this->except)
                     ))
                     ->all();
     }

@@ -2,8 +2,8 @@
 
 namespace Ja\Livewire\Livewire;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Notifications extends Component
@@ -18,7 +18,7 @@ class Notifications extends Component
 
     public function mount()
     {
-        $this->messages = new Collection;
+        $this->messages = new Collection();
 
         if ($message = session()->get('success-message')) {
             $this->showSuccessMessage($message);

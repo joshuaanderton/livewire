@@ -1,4 +1,4 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade;
 
@@ -62,7 +62,7 @@ class Dropdown extends Component
         $this->xShow = $xShow ? Str::replace(' ', '-', trim($xShow)) : null;
         $this->class = $class ?: '';
         $this->button = $button;
-        $this->left = !! $left;
+        $this->left = ! ! $left;
 
         $this->except = array_merge($this->except ?? [], [
             'left'
@@ -75,13 +75,13 @@ class Dropdown extends Component
     {
         $this->class = (
             collect(array_merge($this->cssClasses, explode(' ', $this->class)))
-                ->filter(fn ($class) => !empty($class))
+                ->filter(fn ($class) => ! empty($class))
                 ->unique()
                 ->join(' ')
         );
 
         $menuCssClasses = collect($this->menuCssClasses);
-        
+
         if ($this->left) {
             $menuCssClasses->concat(['origin-top-left', 'left-0']);
         } else {

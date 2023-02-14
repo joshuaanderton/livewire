@@ -1,4 +1,4 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade;
 
@@ -7,7 +7,7 @@ use Ja\Livewire\Blade as Component;
 class ColorPicker extends Component
 {
     public ?string $label;
-    
+
     public string $wrapperClass;
 
     /**

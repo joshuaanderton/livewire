@@ -1,4 +1,6 @@
-<?php declare (strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Ja\Livewire;
 
@@ -13,6 +15,7 @@ abstract class TestScenario
     public static function make(array $data = []): array
     {
         $class = get_called_class();
-        return (new $class)->handle($data);
+
+        return (new $class())->handle($data);
     }
 }

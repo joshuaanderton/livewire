@@ -2,9 +2,9 @@
 
 namespace Ja\Livewire\Tests\Feature\Livewire;
 
-use Ja\Livewire\Livewire\Notifications;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Ja\Livewire\Livewire\Notifications;
 use Livewire\Livewire;
 use Tests\TestCase;
 

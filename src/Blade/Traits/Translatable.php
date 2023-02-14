@@ -1,16 +1,16 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade\Traits;
 
-use Ja\Livewire\Support\Blade as JaBlade;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Str;
+use Ja\Livewire\Support\Blade as JaBlade;
 
 trait Translatable
 {
     /**
      * Define attributes that should be translated
-     * 
+     *
      * @return ?array
      */
     // protected array $translatable = [];
@@ -31,7 +31,7 @@ trait Translatable
                                 ? Lang::get($value)
                                 : $value
                         ));
-        
+
         // Set class properties (if defined on class)
         collect($translated)
             ->filter(fn ($value, $name) => JaBlade::hasProperty($this, $name))
@@ -41,7 +41,7 @@ trait Translatable
         return $translated
                     ->filter(fn ($value, $name) => (
                         //!JaBlade::hasProperty($this, $name) &&
-                        !in_array($name, $this->except)
+                        ! in_array($name, $this->except)
                     ))
                     ->all();
     }

@@ -14,8 +14,8 @@ class Livewire extends LivewireComponent
     protected function getComponentViewPathProperty()
     {
         $componentClass = $this->componentNamespace;
-        $componentPath  = explode('Http\\Livewire\\', $componentClass)[0];
-        $componentPath  = collect(explode('\\', $componentPath))
+        $componentPath = explode('Http\\Livewire\\', $componentClass)[0];
+        $componentPath = collect(explode('\\', $componentPath))
                             ->map(fn ($s) => Str::snake($s, '-'))
                             ->join('.');
 

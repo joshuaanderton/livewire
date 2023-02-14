@@ -5,12 +5,12 @@ namespace Ja\Livewire\Support;
 use Exception;
 use Illuminate\View\Component as BladeComponent;
 
-class Blade
+final class Blade
 {
     /**
      * Check to see if component class uses a certain component trait
      *
-     * @return boolean
+     * @return bool
      */
     public static function componentHasTrait(string|BladeComponent $component, string $trait)
     {
@@ -20,9 +20,9 @@ class Blade
             );
         }
 
-        if (is_string($component) && !is_subclass_of($component, BladeComponent::class)) {
+        if (is_string($component) && ! is_subclass_of($component, BladeComponent::class)) {
             throw new Exception(
-                "\"{$component}\" is not a subclass of \"" . BladeComponent::class . "\""
+                "\"{$component}\" is not a subclass of \"".BladeComponent::class."\""
             );
         }
 
@@ -35,8 +35,8 @@ class Blade
     /**
      * Check if component has certain property defined
      *
-     * @var BladeComponent $component
-     * @var string|array $classNames
+     * @var BladeComponent
+     * @var string|array
      * @return void
      */
     public static function hasProperty(BladeComponent $component, string $property): bool

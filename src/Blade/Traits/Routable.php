@@ -1,4 +1,4 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade\Traits;
 
@@ -8,7 +8,7 @@ trait Routable
 {
     /**
      * Define attributes that should be merged
-     * 
+     *
      * @return array $routable
      */
     // protected array $routable = [];
@@ -26,7 +26,7 @@ trait Routable
         }
 
         $routed = collect($routable)->map(fn ($value, $name) => $this->route($value));
-        
+
         // Set class properties (if defined on class)
         collect($routed)
             ->filter(fn ($value, $name) => $this->hasProp($name))

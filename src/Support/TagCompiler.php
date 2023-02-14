@@ -5,7 +5,6 @@ namespace Ja\Livewire\Support;
 use Illuminate\Support\Str;
 use Illuminate\View\Compilers\ComponentTagCompiler;
 use InvalidArgumentException;
-use Ja\Livewire\Support\Helper as JaLivewire;
 
 class TagCompiler extends ComponentTagCompiler
 {

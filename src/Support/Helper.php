@@ -2,14 +2,13 @@
 
 namespace Ja\Livewire\Support;
 
-use Exception;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class Helper
 {
-    protected const packagePath = __DIR__ . '/../../';
+    protected const packagePath = __DIR__.'/../../';
 
     public static function arr(...$parameters): array
     {
@@ -82,7 +81,7 @@ class Helper
         );
     }
 
-    public static function view(string $name, array $data = [], )
+    public static function view(string $name, array $data = [])
     {
         if (view()->exists($override = "vendors/ja-livewire/{$name}")) {
             return view($override, $data);
@@ -102,7 +101,7 @@ class Helper
                 $routeAbsolute ?: $absolute
             );
         }
-    
+
         return route(
             $route,
             $params,

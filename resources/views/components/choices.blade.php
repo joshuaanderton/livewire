@@ -10,6 +10,7 @@
             model: @js($model),
             options: @js($options)
         })"
+        x-cloak
         class="max-w-sm w-full"
     >
         @if ($addItems)

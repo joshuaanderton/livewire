@@ -1,10 +1,10 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade;
 
 use Illuminate\Support\Facades\Lang;
-use Ja\Livewire\Blade\Traits\Translatable;
 use Ja\Livewire\Blade as Component;
+use Ja\Livewire\Blade\Traits\Translatable;
 
 class Notification extends Component
 {
@@ -33,8 +33,7 @@ class Notification extends Component
         bool $persist = null,
         bool $success = null,
         bool $error = null
-    )
-    {
+    ) {
         $this->heading = $heading;
         $this->text = $text;
         $this->persist = ! ! $persist;

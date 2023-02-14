@@ -1,20 +1,20 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade;
 
 use Illuminate\Support\Str;
-use Ja\Livewire\Blade\Traits\Mergeable;
+use Ja\Livewire\Blade as Component;
 use Ja\Livewire\Blade\Traits\CssClassable;
+use Ja\Livewire\Blade\Traits\Mergeable;
 use Ja\Livewire\Blade\Traits\Routable;
 use Ja\Livewire\Blade\Traits\Translatable;
-use Ja\Livewire\Blade as Component;
 
 class Input extends Component
 {
-    use CssClassable,
-        Routable,
-        Mergeable,
-        Translatable;
+    use CssClassable;
+    use Routable;
+    use Mergeable;
+    use Translatable;
 
     protected $translatable = ['label', 'placeholder', 'disclaimer'];
 
@@ -80,7 +80,7 @@ class Input extends Component
         $this->icon = $icon;
         $this->prepend = $prepend;
         $this->spaceAbove = $spaceAbove;
-        $this->sm = !! $sm;
+        $this->sm = ! ! $sm;
 
         if ($sm === null && $small !== null) {
             $this->sm = $small;

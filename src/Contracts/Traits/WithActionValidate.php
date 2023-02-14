@@ -10,9 +10,9 @@ trait WithActionValidate
     /**
      * Validate rules for provided action
      *
-     * @var string $action
-     * @var array $data
-     * @var array ...$arguments 
+     * @var string
+     * @var array
+     * @var array ...$arguments
      * @return array|ValidationException
      */
     public static function validate(string $action, array $data, ...$arguments): array|ValidationException
@@ -21,8 +21,8 @@ trait WithActionValidate
         $customAttributes = $arguments['customAttributes'] ?? [];
 
         $rules = count($arguments)
-            ? (new $contractClass)->$action(...$arguments)
-            : (new $contractClass)->$action();
+            ? (new $contractClass())->$action(...$arguments)
+            : (new $contractClass())->$action();
 
         // if ($prefix = explode('.', array_keys($data)[0])[0] ?? false) {
         //     $customAttributes = collect($rules)
@@ -42,7 +42,7 @@ trait WithActionValidate
                 ->collapse()
                 ->all();
         }
-        
+
         Validator::make($data, $rules, [], $customAttributes)->validate();
 
 

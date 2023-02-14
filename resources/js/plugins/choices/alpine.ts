@@ -1,11 +1,10 @@
 import Choices from 'choices.js'
-import 'choices.js/public/assets/styles/choices.min.css'
-import './styles.css'
 
 interface ChoicesConfig {
   removeItems: boolean
   removeItemButton: boolean
   addItems?: boolean
+  searchFields?: string[]
 }
 
 interface Props {
@@ -63,6 +62,7 @@ export const data = ({
       let config: ChoicesConfig = {
         removeItems: true,
         removeItemButton: true,
+        //searchFields: ['label'], //['label', 'value'],
       }
 
       if (addItems) {

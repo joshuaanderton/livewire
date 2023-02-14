@@ -1,9 +1,9 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade;
 
-use Ja\Livewire\Blade\Traits\Translatable;
 use Ja\Livewire\Blade as Component;
+use Ja\Livewire\Blade\Traits\Translatable;
 
 class Label extends Component
 {
@@ -26,7 +26,7 @@ class Label extends Component
     {
         $this->text = $text;
         $this->required = ! ! $required;
-        
+
         if ($as) {
             $this->tag = $as;
         }

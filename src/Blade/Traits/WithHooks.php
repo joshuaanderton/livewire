@@ -1,9 +1,9 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Ja\Livewire\Blade\Traits;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -15,7 +15,7 @@ trait WithHooks
 
     public function __call($name, $arguments)
     {
-        if (!in_array($name, $this->hooks)) {
+        if (! in_array($name, $this->hooks)) {
             return $this->$name(...$arguments);
         }
 
@@ -28,7 +28,6 @@ trait WithHooks
         }
 
         if (($hookMethods = $this->extractHookMethods("after{$hookSuffix}"))->count() > 0) {
-
             $response = $this->$name(...$arguments);
 
             $hookMethods->map(fn ($hookMethod) => (
@@ -49,16 +48,16 @@ trait WithHooks
     protected function extractHookMethods(string $hookPrefix): Collection
     {
         return (
-          collect((new ReflectionClass($this))->getMethods(ReflectionMethod::IS_PROTECTED))
-              ->reject(fn (ReflectionMethod $method) => (
-                  $method->isStatic()
-              ))
-              ->filter(fn (ReflectionMethod $method) => (
-                  Str::startsWith($hookPrefix, $method)
-              ))
-              ->map(function (ReflectionMethod $method) {
-                  return $method->getName();
-              })
+            collect((new ReflectionClass($this))->getMethods(ReflectionMethod::IS_PROTECTED))
+                ->reject(fn (ReflectionMethod $method) => (
+                    $method->isStatic()
+                ))
+                ->filter(fn (ReflectionMethod $method) => (
+                    Str::startsWith($hookPrefix, $method)
+                ))
+                ->map(function (ReflectionMethod $method) {
+                    return $method->getName();
+                })
         );
     }
 }
