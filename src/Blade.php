@@ -4,10 +4,10 @@ namespace Ja\Livewire;
 
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
-use Ja\Livewire\Blade\Traits\CssClassable;
-use Ja\Livewire\Blade\Traits\Mergeable;
-use Ja\Livewire\Blade\Traits\Routable;
-use Ja\Livewire\Blade\Traits\Translatable;
+use Ja\Livewire\View\Traits\CssClassable;
+use Ja\Livewire\View\Traits\Mergeable;
+use Ja\Livewire\View\Traits\Routable;
+use Ja\Livewire\View\Traits\Translatable;
 use Ja\Livewire\Support\Blade as JaLivewireBlade;
 use Ja\Livewire\Support\Helper as JaLivewire;
 
@@ -81,7 +81,7 @@ class Blade extends Component
 
         $viewPath = $class;
         $viewPath = Str::remove('App\\View\\Components\\', $viewPath);
-        $viewPath = Str::remove(self::class.'\\', $viewPath);
+        $viewPath = Str::remove('Ja\\Livewire\\View\\Components\\', $viewPath);
         $viewPath = (
             collect(explode('\\', $viewPath))
                 ->map(fn ($slug) => Str::snake($slug, '-'))

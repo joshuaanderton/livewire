@@ -1,6 +1,6 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\Blade\Traits;
+namespace Ja\Livewire\View\Traits;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;

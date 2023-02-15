@@ -1,6 +1,6 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\Blade;
+namespace Ja\Livewire\View\Components;
 
 use Illuminate\Support\Str;
 use Ja\Livewire\Blade as Component;

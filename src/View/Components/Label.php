@@ -1,9 +1,9 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\Blade;
+namespace Ja\Livewire\View\Components;
 
 use Ja\Livewire\Blade as Component;
-use Ja\Livewire\Blade\Traits\Translatable;
+use Ja\Livewire\View\Traits\Translatable;
 
 class Label extends Component
 {

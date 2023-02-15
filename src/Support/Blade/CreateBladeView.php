@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Livewire\Support;
+namespace Ja\Livewire\Support\Blade;
 
 use Illuminate\View\Component;
 
@@ -14,7 +14,5 @@ class CreateBladeView extends Component
         );
     }
 
-    public function render()
-    {
-    }
+    public function render() {}
 }

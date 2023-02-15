@@ -4,13 +4,18 @@ namespace Ja\Livewire\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Blade;
-
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Ja\Livewire\Blade as JaBlade;
-use Ja\Livewire\Livewire as JaLivewire;
-use Ja\Livewire\Support\TagCompiler;
+
 use Livewire\Livewire;
+
+use Ja\Livewire\View\Compilers\BladeTagCompiler;
+use Ja\Livewire\View\Compilers\PascalTagCompiler;
+use Ja\Livewire\View\Components\Element;
+use Ja\Livewire\Support\Blade as JaBladeHelper;
+use Ja\Livewire\View\Components as JaLivewireComponents;
+use Ja\Livewire\Livewire as JaLivewire;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -51,7 +56,7 @@ class ServiceProvider extends BaseServiceProvider
 
     private function loadBladeComponents(): self
     {
-        Blade::componentNamespace(JaBlade::class, 'jal');
+        Blade::componentNamespace(JaLivewireComponents::class, 'jal');
 
         return $this;
     }
@@ -69,10 +74,11 @@ class ServiceProvider extends BaseServiceProvider
 
     protected function loadCustomTagCompiler(): self
     {
-        if (method_exists($this->app['blade.compiler'], 'precompiler')) {
-            $this->app['blade.compiler']->precompiler(function ($string) {
-                return app(TagCompiler::class)->compile($string);
-            });
+        $compiler = $this->app['blade.compiler'];
+
+        if (method_exists($compiler, 'precompiler')) {
+            $compiler->precompiler(fn ($string) => app(BladeTagCompiler::class)->compile($string));
+            $compiler->precompiler(fn ($string) => app(PascalTagCompiler::class)->compile($string));
         }
 
         return $this;
@@ -91,11 +97,15 @@ class ServiceProvider extends BaseServiceProvider
     public function registerClassAliases(): self
     {
         $this->app->booting(function ($app) {
+            
             $loader = AliasLoader::getInstance();
 
-            collect([
+            $aliases = [
                 \JL::class => \Ja\Livewire\Support\Helper::class,
-            ])->map(fn ($class, $namespace) => (
+                \Tailwind::class => \Ja\Livewire\Support\Tailwind::class,
+            ];
+
+            collect($aliases)->map(fn ($class, $namespace) => (
                 $loader->alias(
                     $namespace,
                     $class

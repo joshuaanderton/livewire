@@ -1,6 +1,6 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\Blade;
+namespace Ja\Livewire\View\Components;
 
 use Exception;
 use Illuminate\Support\Arr;

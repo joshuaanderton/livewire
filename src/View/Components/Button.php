@@ -1,14 +1,14 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\Blade;
+namespace Ja\Livewire\View\Components;
 
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Ja\Livewire\Blade as Component;
-use Ja\Livewire\Blade\Traits\CssClassable;
-use Ja\Livewire\Blade\Traits\Mergeable;
-use Ja\Livewire\Blade\Traits\Routable;
-use Ja\Livewire\Blade\Traits\Translatable;
+use Ja\Livewire\View\Traits\CssClassable;
+use Ja\Livewire\View\Traits\Mergeable;
+use Ja\Livewire\View\Traits\Routable;
+use Ja\Livewire\View\Traits\Translatable;
 
 class Button extends Component
 {
