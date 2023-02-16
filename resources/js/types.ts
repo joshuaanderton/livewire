@@ -6,5 +6,6 @@ export interface LivewireKitConfig {
   plugins?: {
     choices?: LivewireKitConfigPlugin
     flatpickr?: LivewireKitConfigPlugin
+    fileInput?: LivewireKitConfigPlugin
   }
 }

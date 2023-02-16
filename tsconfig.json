@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    // "baseUrl": "../../../",
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -16,15 +16,15 @@
     "noEmit": true,
     "allowJs": true,
     "paths": {
-      "@ja-livewire/*": ["vendor/joshuaanderton/livewire/resources/js/*"],
-      "@livewirekit/*": ["vendor/joshuaanderton/livewire/resources/js/*"],
-      "@/*": ["resources/js/*"],
-      "~/*": ["node_modules/*"],
-      "@pckg/*": ["node_modules/*"],
+      "@ja-livewire/*": ["./resources/js/*",],
+      "@livewirekit/*": ["./resources/js/*",],
+      "@/*": ["../../../resources/js/*"],
+      "~/*": ["../../../node_modules/*"],
+      "@pckg/*": ["../../../node_modules/*"],
     },
   },
   "include": [
-    "resouces/js/**/*.{ts,js}",
-    "vendor/joshuaanderton/livewire/resources/js/**/*.{ts,js}"
+    "../../../resources/js/**/*.{ts,js}",
+    "./resources/js/**/*.{ts,js}"
   ]
 }
