@@ -113,6 +113,7 @@ class ServiceProvider extends BaseServiceProvider
             \Ja\Livewire\Blade\Traits\Routable::class => \LivewireKit\View\Traits\Routable::class,
             \Ja\Livewire\Blade\Traits\Mergeable::class => \LivewireKit\View\Traits\Mergeable::class,
             \Ja\Livewire\Blade\Traits\CssClassable::class => \LivewireKit\View\Traits\CssClassable::class,
+            \Ja\Livewire\Blade\Traits\WithHooks::class => \LivewireKit\View\Traits\WithHooks::class,
             
             \Ja\Livewire\Blade::class,
             \Ja\Livewire\Providers\ServiceProvider::class,
@@ -120,6 +121,7 @@ class ServiceProvider extends BaseServiceProvider
             \Ja\Livewire\View\Traits\Routable::class,
             \Ja\Livewire\View\Traits\Mergeable::class,
             \Ja\Livewire\View\Traits\CssClassable::class,
+            \Ja\Livewire\View\Traits\WithHooks::class,
             \Ja\Livewire\Livewire\Notifications::class,
             \Ja\Livewire\TestScenario::class,
         ];
