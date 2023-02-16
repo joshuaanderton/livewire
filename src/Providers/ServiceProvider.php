@@ -121,6 +121,7 @@ class ServiceProvider extends BaseServiceProvider
             \Ja\Livewire\View\Traits\Mergeable::class,
             \Ja\Livewire\View\Traits\CssClassable::class,
             \Ja\Livewire\Livewire\Notifications::class,
+            \Ja\Livewire\TestScenario::class,
         ];
 
         $deprecated = (
