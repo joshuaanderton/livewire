@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Livewire;
+namespace LivewireKit;
 
 use Lorisleiva\Actions\Concerns\AsCommand;
 use Lorisleiva\Actions\Concerns\AsController;

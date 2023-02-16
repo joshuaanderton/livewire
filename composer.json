@@ -17,12 +17,13 @@
   },
   "autoload": {
       "psr-4": {
+          "LivewireKit\\": "src",
           "Ja\\Livewire\\": "src"
       }
   },
   "autoload-dev": {
       "psr-4": {
-          "Ja\\Livewire\\Tests\\": "tests"
+          "LivewireKit\\Tests\\": "tests"
       }
   },
   "config": {
@@ -31,7 +32,8 @@
   "extra": {
       "laravel": {
           "providers": [
-              "Ja\\Livewire\\Providers\\ServiceProvider"
+              "LivewireKit\\Providers\\ServiceProvider",
+              "Ja\\Livewire\\Providers\\JaLivewireServiceProvider"
           ]
       }
   }

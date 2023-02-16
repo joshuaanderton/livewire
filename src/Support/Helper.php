@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Livewire\Support;
+namespace LivewireKit\Support;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
@@ -72,7 +72,7 @@ class Helper
 
     public static function file(string $name, array $data = [])
     {
-        if (File::exists($override = "vendors/ja-livewire/{$name}")) {
+        if (File::exists($override = "vendors/livewirekit/{$name}")) {
             return File::get($override);
         }
 
@@ -83,11 +83,11 @@ class Helper
 
     public static function view(string $name, array $data = [])
     {
-        if (view()->exists($override = "vendors/ja-livewire/{$name}")) {
+        if (view()->exists($override = "vendors/livewirekit/{$name}")) {
             return view($override, $data);
         }
 
-        return view("ja-livewire::{$name}", $data);
+        return view("livewirekit::{$name}", $data);
     }
 
     public static function route(string|array $route, array $params = [], bool $absolute = false)

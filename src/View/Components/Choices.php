@@ -1,10 +1,10 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\View\Components;
+namespace LivewireKit\View\Components;
 
-use Ja\Livewire\Blade as Component;
-use Ja\Livewire\View\Traits\Mergeable;
-use Ja\Livewire\View\Traits\Translatable;
+use LivewireKit\Blade as Component;
+use LivewireKit\View\Traits\Mergeable;
+use LivewireKit\View\Traits\Translatable;
 
 class Choices extends Component
 {
@@ -21,6 +21,8 @@ class Choices extends Component
 
     public bool $addItems;
 
+    public bool $multiple;
+
     public array $props;
 
     /**
@@ -29,16 +31,18 @@ class Choices extends Component
      * @return void
      */
     public function __construct(
-        array $options = null,
-        string $label = null,
-        bool $required = null,
-        bool $addItems = null,
-        array $props = null
+        ?array $options = null,
+        ?string $label = null,
+        ?bool $required = null,
+        ?bool $addItems = null,
+        ?bool $multiple = null,
+        ?array $props = null
     ) {
         $this->options = $options ?: [];
         $this->label = $label;
         $this->required = ! ! $required;
         $this->addItems = ! ! $addItems;
+        $this->multiple = ! ! $multiple;
         $this->props = $props ?: [];
 
         $options = $options ?: $this->props['options'] ?? [];

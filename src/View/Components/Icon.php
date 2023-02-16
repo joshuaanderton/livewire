@@ -1,12 +1,12 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\View\Components;
+namespace LivewireKit\View\Components;
 
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Ja\Livewire\Blade as Component;
-use Ja\Livewire\Support\Helper as JL;
+use LivewireKit\Blade as Component;
+use LivewireKit\Support\Helper as JL;
 
 class Icon extends Component
 {

@@ -1,6 +1,6 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\View\Components;
+namespace LivewireKit\View\Components;
 
 class Select extends Input
 {

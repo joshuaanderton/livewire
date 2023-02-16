@@ -1,6 +1,6 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\Support\Blade;
+namespace LivewireKit\Support\Blade;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;

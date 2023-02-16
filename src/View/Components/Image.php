@@ -1,8 +1,8 @@
 <?php
 
-namespace Ja\Livewire\View\Components;
+namespace LivewireKit\View\Components;
 
-use Ja\Livewire\Blade as Component;
+use LivewireKit\Blade as Component;
 
 class Image extends Component
 {

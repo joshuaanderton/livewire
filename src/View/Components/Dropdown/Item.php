@@ -1,10 +1,10 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\View\Components\Dropdown;
+namespace LivewireKit\View\Components\Dropdown;
 
-use Ja\Livewire\Blade as Component;
-use Ja\Livewire\View\Traits\Routable;
-use Ja\Livewire\View\Traits\Translatable;
+use LivewireKit\Blade as Component;
+use LivewireKit\View\Traits\Routable;
+use LivewireKit\View\Traits\Translatable;
 
 class Item extends Component
 {

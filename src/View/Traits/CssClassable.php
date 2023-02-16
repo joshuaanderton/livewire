@@ -1,6 +1,6 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\View\Traits;
+namespace LivewireKit\View\Traits;
 
 use Illuminate\Support\Arr;
 

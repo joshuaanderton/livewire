@@ -1,13 +1,13 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\View\Components;
+namespace LivewireKit\View\Components;
 
 use Illuminate\Support\Str;
-use Ja\Livewire\Blade as Component;
-use Ja\Livewire\View\Traits\CssClassable;
-use Ja\Livewire\View\Traits\Mergeable;
-use Ja\Livewire\View\Traits\Routable;
-use Ja\Livewire\View\Traits\Translatable;
+use LivewireKit\Blade as Component;
+use LivewireKit\View\Traits\CssClassable;
+use LivewireKit\View\Traits\Mergeable;
+use LivewireKit\View\Traits\Routable;
+use LivewireKit\View\Traits\Translatable;
 
 class Input extends Component
 {

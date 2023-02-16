@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Livewire\Providers;
+namespace LivewireKit\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Blade;
@@ -10,12 +10,10 @@ use Illuminate\Support\Str;
 
 use Livewire\Livewire;
 
-use Ja\Livewire\View\Compilers\BladeTagCompiler;
-use Ja\Livewire\View\Compilers\PascalTagCompiler;
-use Ja\Livewire\View\Components\Element;
-use Ja\Livewire\Support\Blade as JaBladeHelper;
-use Ja\Livewire\View\Components as JaLivewireComponents;
-use Ja\Livewire\Livewire as JaLivewire;
+use LivewireKit\View\Compilers\BladeTagCompiler;
+use LivewireKit\View\Compilers\PascalTagCompiler;
+use LivewireKit\View\Components as LivewireKitComponents;
+use LivewireKit\Livewire as LivewireKit;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -56,7 +54,8 @@ class ServiceProvider extends BaseServiceProvider
 
     private function loadBladeComponents(): self
     {
-        Blade::componentNamespace(JaLivewireComponents::class, 'jal');
+        Blade::componentNamespace(LivewireKitComponents::class, 'jal');
+        Blade::componentNamespace(LivewireKitComponents::class, 'kit');
 
         return $this;
     }
@@ -64,9 +63,12 @@ class ServiceProvider extends BaseServiceProvider
     private function loadLivewireComponents(): self
     {
         collect([
-            'notifications' => JaLivewire\Notifications::class,
+            'notifications' => LivewireKit\Notifications::class,
         ])->each(fn ($class, $key) => (
-            Livewire::component("jal-{$key}", $class)
+            collect([
+                "jal-{$key}",
+                "kit-{$key}"
+            ])->each(fn ($alias) => Livewire::component($alias, $class))
         ));
 
         return $this;
@@ -88,7 +90,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->loadViewsFrom(
             $this->path('resources/views'),
-            'ja-livewire'
+            'livewirekit'
         );
 
         return $this;
@@ -100,12 +102,40 @@ class ServiceProvider extends BaseServiceProvider
             
             $loader = AliasLoader::getInstance();
 
-            $aliases = [
-                \JL::class => \Ja\Livewire\Support\Helper::class,
-                \Tailwind::class => \Ja\Livewire\Support\Tailwind::class,
+            $deprecated = [
+                \Ja\Livewire\Blade\Traits\Translatable::class => \LivewireKit\View\Traits\Translatable::class,
+                \Ja\Livewire\Blade\Traits\Routable::class => \LivewireKit\View\Traits\Routable::class,
+                \Ja\Livewire\Blade\Traits\Mergeable::class => \LivewireKit\View\Traits\Mergeable::class,
+                \Ja\Livewire\Blade\Traits\CssClassable::class => \LivewireKit\View\Traits\CssClassable::class,
+                
+                \Ja\Livewire\Blade::class,
+                \Ja\Livewire\Providers\ServiceProvider::class,
+                \Ja\Livewire\View\Traits\Translatable::class,
+                \Ja\Livewire\View\Traits\Routable::class,
+                \Ja\Livewire\View\Traits\Mergeable::class,
+                \Ja\Livewire\View\Traits\CssClassable::class,
+                \Ja\Livewire\Livewire\Notifications::class,
             ];
 
-            collect($aliases)->map(fn ($class, $namespace) => (
+            $aliases = [
+                \Kit::class => \LivewireKit\Support\Helper::class,
+                \Tailwind::class => \LivewireKit\Support\Tailwind::class,
+
+                // Deprecating
+                \JL::class => \LivewireKit\Support\Helper::class,
+            ];
+
+            $aliases = (
+                (new Collection($deprecated))
+                    ->map(fn ($value, $key) => is_int($key)
+                        ? [$value => Str::replace('Ja\\Livewire', 'LivewireKit', $value)]
+                        : [$key => $value]
+                    )
+                    ->collapse()
+                    ->merge($aliases)
+            );
+
+            $aliases->map(fn ($class, $namespace) => (
                 $loader->alias(
                     $namespace,
                     $class

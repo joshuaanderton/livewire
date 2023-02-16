@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Livewire;
+namespace LivewireKit;
 
 use Livewire\Component as LivewireComponent;
 

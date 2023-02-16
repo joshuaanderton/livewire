@@ -1,10 +1,10 @@
-export interface JaLivewireConfigPlugin {
+export interface LivewireKitConfigPlugin {
   name?: string
 }
 
-export interface JaLivewireConfig {
+export interface LivewireKitConfig {
   plugins?: {
-    choices?: JaLivewireConfigPlugin
-    flatpickr?: JaLivewireConfigPlugin
+    choices?: LivewireKitConfigPlugin
+    flatpickr?: LivewireKitConfigPlugin
   }
 }

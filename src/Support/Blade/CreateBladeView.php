@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Livewire\Support\Blade;
+namespace LivewireKit\Support\Blade;
 
 use Illuminate\View\Component;
 

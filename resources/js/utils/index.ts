@@ -1,5 +1,5 @@
-import { JaLivewireConfig } from "../types"
+import { LivewireKitConfig } from "../types"
 
-export const config = (): JaLivewireConfig => {
+export const config = (): LivewireKitConfig => {
   return __JA_LIVEWIRE_CONFIG__ || {}
 }

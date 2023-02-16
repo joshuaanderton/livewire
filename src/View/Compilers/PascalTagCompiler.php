@@ -1,14 +1,14 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\View\Compilers;
+namespace LivewireKit\View\Compilers;
 
 use InvalidArgumentException;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
-use Ja\Livewire\View\Components\Element;
-use Ja\Livewire\View\Components\Elements;
-use Ja\Livewire\Support\Blade;
-use Ja\Livewire\View\Compiler;
+use LivewireKit\View\Components\Element;
+use LivewireKit\View\Components\Elements;
+use LivewireKit\Support\Blade;
+use LivewireKit\View\Compiler;
 
 class PascalTagCompiler extends Compiler
 {

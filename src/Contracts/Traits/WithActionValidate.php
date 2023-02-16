@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Livewire\Contracts\Traits;
+namespace LivewireKit\Contracts\Traits;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Livewire\Actions;
+namespace LivewireKit\Actions;
 
 class Batch
 {

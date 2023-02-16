@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ja\Livewire;
+namespace LivewireKit;
 
 abstract class TestScenario
 {

@@ -1,8 +1,8 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\View\Traits;
+namespace LivewireKit\View\Traits;
 
-use Ja\Livewire\Support\Blade as JaBlade;
+use LivewireKit\Support\Blade as JaBlade;
 
 trait Mergeable
 {

@@ -1,8 +1,8 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\View;
+namespace LivewireKit\View;
 
-use Ja\Livewire\Support\Blade;
+use LivewireKit\Support\Blade;
 use InvalidArgumentException;
 use Illuminate\View\Compilers\ComponentTagCompiler;
 

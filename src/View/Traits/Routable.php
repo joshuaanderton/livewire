@@ -1,8 +1,8 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\View\Traits;
+namespace LivewireKit\View\Traits;
 
-use Ja\Livewire\Support\Helper as JL;
+use LivewireKit\Support\Helper as JL;
 
 trait Routable
 {

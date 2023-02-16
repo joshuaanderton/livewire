@@ -1,9 +1,9 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\View\Components;
+namespace LivewireKit\View\Components;
 
 use Exception;
-use Ja\Livewire\Blade as Component;
+use LivewireKit\Blade as Component;
 
 class Transition extends Component
 {

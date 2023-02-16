@@ -1,8 +1,8 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\View\Compilers;
+namespace LivewireKit\View\Compilers;
 
-use Ja\Livewire\View\Compiler;
+use LivewireKit\View\Compiler;
 
 class BladeTagCompiler extends Compiler
 {

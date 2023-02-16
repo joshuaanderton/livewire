@@ -1,9 +1,9 @@
 <?php declare (strict_types=1);
 
-namespace Ja\Livewire\View\Components;
+namespace LivewireKit\View\Components;
 
-use Ja\Livewire\Support\Blade;
-use Ja\Livewire\View\Traits\AlpineJsable;
+use LivewireKit\Support\Blade;
+use LivewireKit\View\Traits\AlpineJsable;
 use Illuminate\Support\Arr;
 use Illuminate\View\Component;
 

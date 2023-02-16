@@ -1,15 +1,15 @@
 <?php
 
-namespace Ja\Livewire;
+namespace LivewireKit;
 
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
-use Ja\Livewire\View\Traits\CssClassable;
-use Ja\Livewire\View\Traits\Mergeable;
-use Ja\Livewire\View\Traits\Routable;
-use Ja\Livewire\View\Traits\Translatable;
-use Ja\Livewire\Support\Blade as JaLivewireBlade;
-use Ja\Livewire\Support\Helper as JaLivewire;
+use LivewireKit\View\Traits\CssClassable;
+use LivewireKit\View\Traits\Mergeable;
+use LivewireKit\View\Traits\Routable;
+use LivewireKit\View\Traits\Translatable;
+use LivewireKit\Support\Blade as LivewireKitBlade;
+use LivewireKit\Support\Helper as LivewireKit;
 
 class Blade extends Component
 {
@@ -44,7 +44,7 @@ class Blade extends Component
             return view($name, $data)->render();
         }
 
-        return JaLivewire::view($name, $data)->render();
+        return LivewireKit::view($name, $data)->render();
     }
 
     private function triggerHelperTraits(string $event)
@@ -116,8 +116,8 @@ class Blade extends Component
         $componentClass = get_called_class();
 
         return (
-            JaLivewireBlade::componentHasTrait($componentClass, $trait) ||
-            JaLivewireBlade::componentHasTrait(get_parent_class($componentClass), $trait)
+            LivewireKitBlade::componentHasTrait($componentClass, $trait) ||
+            LivewireKitBlade::componentHasTrait(get_parent_class($componentClass), $trait)
         );
     }
 }

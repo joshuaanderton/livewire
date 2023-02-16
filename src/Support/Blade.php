@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Livewire\Support;
+namespace LivewireKit\Support;
 
 use Exception;
 use Illuminate\Support\Str;
@@ -89,7 +89,7 @@ final class Blade
 
         $viewNamespaces = [
             'components',
-            'ja-livewire::components'
+            'livewirekit::components'
         ];
 
         $class = (

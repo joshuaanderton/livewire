@@ -1,10 +1,10 @@
 <?php
 
-namespace Ja\Livewire\Tests\Feature\Livewire;
+namespace LivewireKit\Tests\Feature\Livewire;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Ja\Livewire\Livewire\Notifications;
+use LivewireKit\Livewire\Notifications;
 use Livewire\Livewire;
 use Tests\TestCase;
 

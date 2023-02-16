@@ -1,9 +1,9 @@
 import { UserConfig, searchForWorkspaceRoot } from 'vite'
 import path from 'path'
 import { _merge, _set } from './resources/js/vite'
-import { JaLivewireConfig } from './resources/js/types'
+import { LivewireKitConfig } from './resources/js/types'
 
-export default (config: JaLivewireConfig = {}) => {
+export default (config: LivewireKitConfig = {}) => {
   
   const jaLivewireConfig = config
 

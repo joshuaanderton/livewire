@@ -1,9 +1,9 @@
 <?php
 
-namespace Ja\Livewire;
+namespace LivewireKit;
 
-use Ja\Livewire\Contracts\Traits\WithActionValidate;
-use Ja\Livewire\Contracts\Traits\WithLivewireRulePrefix;
+use LivewireKit\Contracts\Traits\WithActionValidate;
+use LivewireKit\Contracts\Traits\WithLivewireRulePrefix;
 
 abstract class Contract
 {

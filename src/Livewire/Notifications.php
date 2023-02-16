@@ -1,6 +1,6 @@
 <?php
 
-namespace Ja\Livewire\Livewire;
+namespace LivewireKit\Livewire;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -62,6 +62,6 @@ class Notifications extends Component
 
     public function render()
     {
-        return view('ja-livewire::livewire.notifications');
+        return view('livewirekit::livewire.notifications');
     }
 }
