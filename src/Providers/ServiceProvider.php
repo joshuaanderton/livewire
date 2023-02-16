@@ -108,42 +108,43 @@ class ServiceProvider extends BaseServiceProvider
 
     public function registerClassAliases(): self
     {
-        $this->app->booting(function ($app) {
+        $deprecated = [
+            \Ja\Livewire\Blade\Traits\Translatable::class => \LivewireKit\View\Traits\Translatable::class,
+            \Ja\Livewire\Blade\Traits\Routable::class => \LivewireKit\View\Traits\Routable::class,
+            \Ja\Livewire\Blade\Traits\Mergeable::class => \LivewireKit\View\Traits\Mergeable::class,
+            \Ja\Livewire\Blade\Traits\CssClassable::class => \LivewireKit\View\Traits\CssClassable::class,
+            
+            \Ja\Livewire\Blade::class,
+            \Ja\Livewire\Providers\ServiceProvider::class,
+            \Ja\Livewire\View\Traits\Translatable::class,
+            \Ja\Livewire\View\Traits\Routable::class,
+            \Ja\Livewire\View\Traits\Mergeable::class,
+            \Ja\Livewire\View\Traits\CssClassable::class,
+            \Ja\Livewire\Livewire\Notifications::class,
+        ];
+
+        $deprecated = (
+            (new Collection($deprecated))
+                ->map(fn ($value, $key) => is_int($key)
+                    ? [$value => Str::replace('Ja\\Livewire', 'LivewireKit', $value)]
+                    : [$key => $value]
+                )
+                ->collapse()
+        );
+
+        $aliases = [
+            \Kit::class => \LivewireKit\Support\Helper::class,
+            \Tailwind::class => \LivewireKit\Support\Tailwind::class,
+
+            // Deprecating
+            \JL::class => \LivewireKit\Support\Helper::class,
+        ];
+
+        $aliases = $deprecated->merge($aliases);
+
+        $this->app->booting(function ($app) use ($aliases) {
             
             $loader = AliasLoader::getInstance();
-
-            $deprecated = [
-                \Ja\Livewire\Blade\Traits\Translatable::class => \LivewireKit\View\Traits\Translatable::class,
-                \Ja\Livewire\Blade\Traits\Routable::class => \LivewireKit\View\Traits\Routable::class,
-                \Ja\Livewire\Blade\Traits\Mergeable::class => \LivewireKit\View\Traits\Mergeable::class,
-                \Ja\Livewire\Blade\Traits\CssClassable::class => \LivewireKit\View\Traits\CssClassable::class,
-                
-                \Ja\Livewire\Blade::class,
-                \Ja\Livewire\Providers\ServiceProvider::class,
-                \Ja\Livewire\View\Traits\Translatable::class,
-                \Ja\Livewire\View\Traits\Routable::class,
-                \Ja\Livewire\View\Traits\Mergeable::class,
-                \Ja\Livewire\View\Traits\CssClassable::class,
-                \Ja\Livewire\Livewire\Notifications::class,
-            ];
-
-            $aliases = [
-                \Kit::class => \LivewireKit\Support\Helper::class,
-                \Tailwind::class => \LivewireKit\Support\Tailwind::class,
-
-                // Deprecating
-                \JL::class => \LivewireKit\Support\Helper::class,
-            ];
-
-            $aliases = (
-                (new Collection($deprecated))
-                    ->map(fn ($value, $key) => is_int($key)
-                        ? [$value => Str::replace('LivewireKit', 'LivewireKit', $value)]
-                        : [$key => $value]
-                    )
-                    ->collapse()
-                    ->merge($aliases)
-            );
 
             $aliases->map(fn ($class, $namespace) => (
                 $loader->alias(
