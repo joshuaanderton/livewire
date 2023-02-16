@@ -17,8 +17,7 @@
   },
   "autoload": {
       "psr-4": {
-          "LivewireKit\\": "src",
-          "Ja\\Livewire\\": "src"
+          "LivewireKit\\": "src"
       }
   },
   "autoload-dev": {
@@ -32,8 +31,7 @@
   "extra": {
       "laravel": {
           "providers": [
-              "LivewireKit\\Providers\\ServiceProvider",
-              "Ja\\Livewire\\Providers\\JaLivewireServiceProvider"
+              "LivewireKit\\Providers\\ServiceProvider"
           ]
       }
   }

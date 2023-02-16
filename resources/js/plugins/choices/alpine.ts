@@ -1,4 +1,4 @@
-import Choices from 'choices.js'
+import Choices from '@pckg/choices.js'
 
 interface ChoicesConfig {
   removeItems: boolean

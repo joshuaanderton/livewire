@@ -22,7 +22,9 @@ export default (config: LivewireKitConfig = {}) => {
 
       config = _merge(config, 'resolve.alias', {
         '@ja-livewire': path.resolve(`${packagePath}/resources/js`),
+        '@livewirekit': path.resolve(`${packagePath}/resources/js`),
         '~': path.resolve('./node_modules'),
+        '@pckg': path.resolve('./node_modules'),
         '@': path.resolve('./resources/js'),
       })
 

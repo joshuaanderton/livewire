@@ -26,7 +26,7 @@ export const data = (options: FlatpickrOptions = {}): Data => ({
     }
 
     if (!input) {
-      throw new Error('@ja-livewire: No date input found inside of flatpickr wrapper')
+      throw new Error('@livewirekit: No date input found inside of flatpickr wrapper')
     }
 
     this.model = input.getAttribute('wire:model') || null

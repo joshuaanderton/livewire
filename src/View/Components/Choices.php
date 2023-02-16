@@ -2,6 +2,7 @@
 
 namespace LivewireKit\View\Components;
 
+use Illuminate\Support\Collection;
 use LivewireKit\Blade as Component;
 use LivewireKit\View\Traits\Mergeable;
 use LivewireKit\View\Traits\Translatable;
@@ -46,7 +47,7 @@ class Choices extends Component
         $this->props = $props ?: [];
 
         $options = $options ?: $this->props['options'] ?? [];
-        $options = collect($options);
+        $options = new Collection($options);
 
         if (isset($this->props['options'])) {
             unset($this->props['options']);

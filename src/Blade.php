@@ -81,7 +81,7 @@ class Blade extends Component
 
         $viewPath = $class;
         $viewPath = Str::remove('App\\View\\Components\\', $viewPath);
-        $viewPath = Str::remove('Ja\\Livewire\\View\\Components\\', $viewPath);
+        $viewPath = Str::remove('LivewireKit\\View\\Components\\', $viewPath);
         $viewPath = (
             collect(explode('\\', $viewPath))
                 ->map(fn ($slug) => Str::snake($slug, '-'))

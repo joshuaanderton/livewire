@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "../../",
+    "baseUrl": "./",
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -17,8 +17,10 @@
     "allowJs": true,
     "paths": {
       "@ja-livewire/*": ["vendor/joshuaanderton/livewire/resources/js/*"],
+      "@livewirekit/*": ["vendor/joshuaanderton/livewire/resources/js/*"],
       "@/*": ["resources/js/*"],
       "~/*": ["node_modules/*"],
+      "@pckg/*": ["node_modules/*"],
     },
   },
   "include": [

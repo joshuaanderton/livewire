@@ -84,7 +84,7 @@ final class Blade
 
         $classNamespaces = [
             "\\App\\View\\Components",
-            "\\Ja\\Livewire\\View\\Components",
+            "\\LivewireKit\\View\\Components",
         ];
 
         $viewNamespaces = [

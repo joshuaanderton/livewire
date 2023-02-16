@@ -1,5 +1,5 @@
 import { data } from './alpine'
-import 'choices.js/public/assets/styles/choices.min.css'
+import '@pckg/choices.js/public/assets/styles/choices.min.css'
 import './styles.css'
 import { config } from '../../utils'
 

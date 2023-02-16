@@ -49,6 +49,11 @@ class ServiceProvider extends BaseServiceProvider
             'ja_livewire'
         );
 
+        $this->loadTranslationsFrom(
+            $this->path('lang'),
+            'livewirekit'
+        );
+
         return $this;
     }
 
@@ -67,7 +72,7 @@ class ServiceProvider extends BaseServiceProvider
         ])->each(fn ($class, $key) => (
             collect([
                 "jal-{$key}",
-                "kit-{$key}"
+                "livewirekit-{$key}"
             ])->each(fn ($alias) => Livewire::component($alias, $class))
         ));
 
@@ -88,6 +93,11 @@ class ServiceProvider extends BaseServiceProvider
 
     private function loadViews(): self
     {
+        $this->loadViewsFrom(
+            $this->path('resources/views'),
+            'ja-livewire'
+        );
+
         $this->loadViewsFrom(
             $this->path('resources/views'),
             'livewirekit'
@@ -128,7 +138,7 @@ class ServiceProvider extends BaseServiceProvider
             $aliases = (
                 (new Collection($deprecated))
                     ->map(fn ($value, $key) => is_int($key)
-                        ? [$value => Str::replace('Ja\\Livewire', 'LivewireKit', $value)]
+                        ? [$value => Str::replace('LivewireKit', 'LivewireKit', $value)]
                         : [$key => $value]
                     )
                     ->collapse()
