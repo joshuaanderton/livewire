@@ -67,7 +67,7 @@ trait CssClassable
      * @param (string|array<int|string, string|bool>|null)[] $mergeCssClasses
      * @return string
      */
-    final private function mergeCssClasses(string|array|null $cssClasses, string|array|null ...$mergeCssClasses): string
+    private function mergeCssClasses(string|array|null $cssClasses, string|array|null ...$mergeCssClasses): string
     {
         if (! is_array($cssClasses)) {
             $cssClasses = explode(' ', (string) $cssClasses);
@@ -91,7 +91,7 @@ trait CssClassable
      * @param string|array<int|string, string|bool> $cssClasses
      * @return string
      */
-    final private function cleanCssClasses(string|array $cssClasses)
+    private function cleanCssClasses(string|array $cssClasses)
     {
         if (is_string($cssClasses)) {
             $cssClasses = explode(' ', $cssClasses);
