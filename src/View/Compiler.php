@@ -10,7 +10,7 @@ abstract class Compiler extends ComponentTagCompiler
 {
     abstract protected function tag(): string;
 
-    final private function attributesPregReplace(string $pattern, string $value, ?bool $selfClosing = false)
+    private function attributesPregReplace(string $pattern, string $value, ?bool $selfClosing = false)
     {
         return preg_replace_callback($pattern, function (array $matches) use ($selfClosing) {
             $this->boundAttributes = [];
